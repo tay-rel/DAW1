@@ -1,3 +1,6 @@
+package Practica4;
+
+
 import java.util.Arrays;
 
 public class Ejercicio1 {

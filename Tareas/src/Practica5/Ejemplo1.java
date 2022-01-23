@@ -1,3 +1,6 @@
+package Practica5;
+
+
 import java.util.Scanner;
 
 public class Ejemplo1 {

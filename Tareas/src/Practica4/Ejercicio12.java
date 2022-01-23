@@ -1,4 +1,5 @@
-import java.util.Arrays;
+
+package Practica4;import java.util.Arrays;
 
 public class Ejercicio12 {
 
