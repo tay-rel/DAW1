@@ -1,37 +1,38 @@
 package Practica5;
 
+
+import java.util.Scanner;
+
 public class Ejercicio3 {
 
+	/*
+	 * La funci√≥n .indexOf() nos devuelve la posici√≥n, mediante un n√∫mero entero, de
+	 * una cadena o un car√°cter dentro de una cadena de texto nada. En el caso de
+	 * que el car√°cter o la cadena no exista se devuelve un -1
+	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
-		String cadena ="ìEstamos viviendo en un submarino amarillo.\n No tenemos nada que hacer. En el interior del submarino se est· muy apretado.\n AsÌ que estamos leyendo todo el dÌa. Vamos a salir en 5 dÌas\".";
-		
-		String pedirPalabra=" en ";
-		
+
+		String cadena = "‚ÄúEstamos viviendo en un submarino amarillo.\n No tenemos nada que hacer. En el interior del submarino\n se est√° muy apretado.\n As√≠ que estamos leyendo todo el d√≠a. Vamos a salir en 5 d√≠as\".";
+
+		String pedirPalabra = "en";
+
 		System.out.println(cadena);
-		System.out.println("\nLa palabra "+" '" + pedirPalabra+" '"+" se repite: "+obtenerNumeroVecesSubCadena(cadena, pedirPalabra));
-		
-		
-	}
-	
-	public static int obtenerNumeroVecesSubCadena(String cadena ,String subcadena) {
-		
-		int contador=0;
-		String aux=""; //forma las pequeÒas subcadenas para comparar
-		int limiteSb= subcadena.length();
-		
-		for (int i = 0; i <= cadena.length() -limiteSb ; i++) { //recorro cadena - limiteSb
-			aux=cadena.substring(i, i+limiteSb);
-			
-			if(subcadena.equals(aux)) {
-				contador++;
-			}
-			aux=" ";//Para evaluar de nuevo la cadena el aux debe estar limpio
-			
-		}
-		return contador;
-		
+		System.out.println("\nLa palabra " + " '" + pedirPalabra + " '" + " se repite: "
+				+ obtenerNumeroVecesSubCadena(cadena, pedirPalabra));
+
 	}
 
+	public static int obtenerNumeroVecesSubCadena(String cadena, String subcadena) {
+
+		int contador = 0;
+		int limiteSb = subcadena.length();
+
+		while (cadena.indexOf(subcadena) != -1) {
+			cadena = cadena.substring(cadena.indexOf(subcadena) + limiteSb, cadena.length());
+			contador++;
+		}
+		return contador;
+
+	}
 }

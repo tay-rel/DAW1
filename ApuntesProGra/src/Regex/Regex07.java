@@ -15,6 +15,7 @@ public class Regex07 {
 		Pattern patron = Pattern.compile(regex);
 		Matcher concordancias = patron.matcher(texto);
 		System.out.println("\nConcordancias: ");
+		
 		while (concordancias.find()) {
 			System.out.println("Indice:" + concordancias.start() + "(Texto: " + concordancias.group() + ")");
 		}

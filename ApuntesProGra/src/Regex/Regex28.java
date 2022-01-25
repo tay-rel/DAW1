@@ -10,7 +10,7 @@ public class Regex28 {
 		String regex = "(?i)(<titulo.*?>)(.+?)(</titulo>)";
 		String actualizada = "<titulo>EJEMPLO_TEST</titulo>".replaceAll(regex, "$2").toLowerCase();
 		
-		System.out.println("NUevo texto: "+actualizada);
+		System.out.println("Nuevo texto: "+actualizada);
 	}
 
 }
