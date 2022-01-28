@@ -18,19 +18,17 @@ public class Ejercicio5 {
 	}
 	public static String PasarMayúsculaSubCadena(String text) {
 		String regex="(?i)(<mayus.*?>)(.+?)(</mayus>)";
-		String actualizada = "<mayus>submarino amarillo /<mayus>".replaceAll(regex,text ).toUpperCase();
 		
-		Pattern patron = Pattern.compile(actualizada,Pattern.CASE_INSENSITIVE);
+		
+		Pattern patron = Pattern.compile(regex);
 		Matcher concordancias = patron.matcher(text);
-		System.out.println(text);
-		
 		
 		while (concordancias.find()) {
 			
-			 System.out.println(concordancias);
+			text=text.replaceFirst(regex, concordancias.group(2).toUpperCase());
 		}
 		
-		return actualizada;
+		return text;
 	}
 	
 
