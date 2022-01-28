@@ -6,14 +6,14 @@ public class String01 {
 		String s1 = new String("Hola");
 		String s2 = "Mundo Java";
 
-		System.out.println(s1);
-		System.out.println(s2);
+		System.out.println(s1); //hola
+		System.out.println(s2);//Mundo java
 
-		s1 = s1 + "-";
-		s2 = s2.toUpperCase(); // Pasa a mayúsculas
+		s1 = s1 + "-"; 
+		s2 = s2.toUpperCase(); // Pasa a mayusculas 
 
-		System.out.println(s1);
-		System.out.println(s2);
+		System.out.println(s1);//hola-
+		System.out.println(s2);//MUNDO JAVA
 		System.out.println(s1.concat(s2)); // Concatena dos cadenas.
 		// Equivale a s1 + s2
 		String s3 = s2;
