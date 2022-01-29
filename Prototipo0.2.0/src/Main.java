@@ -63,21 +63,23 @@ public class Main {
 		case 2: 
 			labyrinth.showMap();
 			Thread.sleep(Config.miliseconds);
+			Interface.toContinue();
 			break;
 		case 3:	
-			System.out.println("\nLogin Proximamente");
+			labyrinth.setEntraceExit();;
 			Thread.sleep(Config.miliseconds);
 			break;
 		case 4: 
 			System.out.println("\nLogin Proximamente");
 			Thread.sleep(Config.miliseconds);
+			
 			break;
 		case 5: 
 			//muestra al usuario cuando tiene la session iniciada
 			session.showUser();
 			break;
 		case 6:	
-			System.out.println("\nCerrando sesión");
+			System.out.println("\nCerrando sesion");
 			session.logout();
 			//tiempo de espera
 			Thread.sleep(Config.miliseconds);

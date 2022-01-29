@@ -37,11 +37,11 @@ public class Labyrinth {
 
 		} catch (Exception e) {
 
-			System.err.println("No se ha podido acceder al directorio de laberintos");
+			System.err.println("\nNo se ha podido acceder al directorio de laberintos");
 
 		}
 
-		System.out.print("\nEliga una opci√≥n: ");
+		System.out.print("\nEliga una opcion: ");
 		int option = entry.nextInt();
 
 		return files[option - 1];
@@ -88,7 +88,7 @@ public class Labyrinth {
 			for (int a = 0; a < map.length; a++) {
 				if (a < 10) {
 					System.out.print("  ");
-				} else { //cuando es mayor a 9
+				} else { // cuando es mayor a 9
 					System.out.print(String.valueOf(a).charAt(0) + " ");
 				}
 			}
@@ -99,7 +99,7 @@ public class Labyrinth {
 
 			for (int m = 0; m < map.length; m++) {
 				if (m < 10) {
-					System.out.print( m + " ");
+					System.out.print(m + " ");
 				} else {
 					System.out.print(String.valueOf(m).charAt(1) + " ");
 
@@ -123,7 +123,50 @@ public class Labyrinth {
 			}
 
 		} catch (Exception e) {
-			System.out.println("Vuelva a intentarlo,porfavor");
+			System.out.println("\nVuelva a intentarlo,porfavor");
+		}
+
+	}
+
+	public void setEntraceExit() {
+		if (loaded == false) {
+			System.err.println("\nLo siento no hay ningun laberinto cargado");
+			return;
+		}
+		// reinicia las posiciones de las csasillas cuando se vueleve a inicializar
+		if (startI != 0) {
+			map[startI][endI] = ' ';
+			map[startJ][endJ] = ' ';
+
+		}
+		//showMap(); // muestra el mapa
+		System.out.println("\nIntroduce la coordenadas de [E]ntrada/[S]alida");
+		startI = Interface.getInt("Columna [E]: ");
+		endI = Interface.getInt("Fila [E]: ");
+		startJ = Interface.getInt("Columna [S]: ");
+		endJ = Interface.getInt("Fila [S]: ");
+
+		try {
+			// entrada
+			if (map[startI][endI] != ' ') {
+				System.out.println("\n°Opps! Te has encontrado con una pared");
+				return;
+			} // salida
+			if (map[startJ][endJ] != ' ') {
+				System.out.println("\\n°Opps! Te has encontrado con una pared");
+			}
+
+			map[startI][endI] = 'E';
+			map[startJ][endJ] = 'S';
+			System.out.println("\nLos puntos se ha cargado correctamente\n °Bien hecho!");
+			return;
+		} catch (Exception e) {
+			System.err.println("Lo siento, los valores estan fuera de rango");
+			startI = 0;
+			endI = 0;
+			startJ = 0;
+			endJ = 0; // valores que se han metido fuera de rango
+			return;
 		}
 
 	}
