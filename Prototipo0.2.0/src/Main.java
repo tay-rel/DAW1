@@ -66,7 +66,8 @@ public class Main {
 			Interface.toContinue();
 			break;
 		case 3:	
-			labyrinth.setEntraceExit();;
+			labyrinth.showMap();
+			labyrinth.setEntraceExit();
 			Thread.sleep(Config.miliseconds);
 			break;
 		case 4: 

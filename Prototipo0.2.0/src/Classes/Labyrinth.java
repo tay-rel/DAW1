@@ -140,7 +140,7 @@ public class Labyrinth {
 
 		}
 		//showMap(); // muestra el mapa
-		System.out.println("\nIntroduce la coordenadas de [E]ntrada/[S]alida");
+		System.out.println("\nIntroduce la coordenadas de [E]ntrada / [S]alida");
 		startI = Interface.getInt("Columna [E]: ");
 		endI = Interface.getInt("Fila [E]: ");
 		startJ = Interface.getInt("Columna [S]: ");
@@ -149,11 +149,12 @@ public class Labyrinth {
 		try {
 			// entrada
 			if (map[startI][endI] != ' ') {
-				System.out.println("\n¡Opps! Te has encontrado con una pared");
+				System.out.println("\n¡Opps! Te has encontrado con una pared");			
 				return;
 			} // salida
 			if (map[startJ][endJ] != ' ') {
-				System.out.println("\\n¡Opps! Te has encontrado con una pared");
+				System.out.println("\n¡Opps! Te has encontrado con una pared");
+				return;
 			}
 
 			map[startI][endI] = 'E';
