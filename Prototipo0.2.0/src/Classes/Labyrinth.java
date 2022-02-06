@@ -64,10 +64,10 @@ public class Labyrinth {
 
 			for (int i = 0; i < lines.size(); i++) {
 				for (int j = 0; j < lines.get(0).length(); j++) {
-					map[i][j] = lines.get(i).charAt(j); // guarda lo que hay linea i
+					map[i][j] = lines.get(i).charAt(j); // guarda lo que hay linea [i]
 				}
 			}
-			filename = myObj.getName(); // guarda el nombre
+			filename = myObj.getName(); // Guarda el nombre
 
 			myReader.close();
 		} catch (FileNotFoundException e) {
@@ -123,14 +123,14 @@ public class Labyrinth {
 			}
 
 		} catch (Exception e) {
-			System.out.println("\nVuelva a intentarlo,porfavor");
+			System.err.println("\nVuelva a intentarlo,porfavor.");
 		}
 
 	}
 
 	public void setEntraceExit() {
-		if (loaded == false) {
-			System.err.println("\nLo siento no hay ningun laberinto cargado");
+		if (loaded == false) { //Debe estar false porque
+			System.err.println("\nNo hay ningun laberinto cargado");
 			return;
 		}
 		// reinicia las posiciones de las csasillas cuando se vueleve a inicializar
@@ -139,7 +139,7 @@ public class Labyrinth {
 			map[startJ][endJ] = ' ';
 
 		}
-		//showMap(); // muestra el mapa
+		// showMap(); // muestra el mapa
 		System.out.println("\nIntroduce la coordenadas de [E]ntrada / [S]alida");
 		startI = Interface.getInt("Columna [E]: ");
 		endI = Interface.getInt("Fila [E]: ");
@@ -147,13 +147,19 @@ public class Labyrinth {
 		endJ = Interface.getInt("Fila [S]: ");
 
 		try {
+			// si son iguales
+			if (startI == startJ && endI == endJ) {
+				System.err.println("\nLo siento los valores no son validos");
+				return;
+
+			}
 			// entrada
 			if (map[startI][endI] != ' ') {
-				System.out.println("\n¡Opps! Te has encontrado con una pared");			
+				System.err.println("\n¡Opps! Te has encontrado con una pared");
 				return;
 			} // salida
 			if (map[startJ][endJ] != ' ') {
-				System.out.println("\n¡Opps! Te has encontrado con una pared");
+				System.err.println("\n¡Opps! Te has encontrado con una pared");
 				return;
 			}
 
@@ -169,7 +175,6 @@ public class Labyrinth {
 			endJ = 0; // valores que se han metido fuera de rango
 			return;
 		}
-
 	}
 
 }

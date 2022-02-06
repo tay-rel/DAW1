@@ -5,8 +5,8 @@ public class Config{//Guarda propiedades estaticas
 	public static final String version = "v0.2.0";
 	public static final int miliseconds = 2000;
 
-	public static final String filePath = "C:\\Users\\Admin\\Desktop\\documentos de Ariel\\grado superior\\Programacion\\k-GitRepositorio\\Prototipo0.2.0\\assets\\files\\";
-	public static final String labyrinthsPath = "C:\\Users\\Admin\\Desktop\\documentos de Ariel\\grado superior\\Programacion\\k-GitRepositorio\\Prototipo0.2.0\\assets\\labyrinths\\";
+	public static final String filePath = "C:\\Users\\tay-r\\Documents\\Java\\DAW1\\Prototipo0.2.0\\assets\\files\\";
+	public static final String labyrinthsPath = "C:\\Users\\tay-r\\Documents\\Java\\DAW1\\Prototipo0.2.0\\assets\\labyrinths\\";
 	public static final String usersFile = "users.txt";
 
 	public static final String welcome = "Soluciona laberinto(" + version + ")";

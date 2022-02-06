@@ -56,7 +56,7 @@ public static void main(String[]args) {
 	}
 	 for (int i = 0; i < usuarios.length; i++) {
 		System.out.println();
-		System.out.println((i+1)+"ยบ"+". Usuario");
+		System.out.println((i+1)+"Nบ"+". Usuario");
 		System.out.println("---------------------");
 		System.out.println("Nombre: "+usuarios[i].nombre);
 		System.out.println("Apellidos: "+usuarios[i].apellidos);
