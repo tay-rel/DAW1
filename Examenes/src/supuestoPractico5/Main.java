@@ -34,7 +34,7 @@ public class Main {
 			cliente[i].address=aux[3];
 			cliente[i].email=aux[4];
 			cliente[i].dischargeDate=aux[5];
-			cliente[i].type=aux[5];
+			cliente[i].type=aux[6];
 			cliente[i].discount=Integer.parseInt(aux[7]);			
 	
 	}
@@ -61,7 +61,7 @@ public class Main {
 				System.out.println("Descuento: "+clientes[i].discount+"\n");
 			}else {
 				System.out.println("Cliente "+(i+1));
-				System.out.println(clientes[i]);
+				System.out.println(clientes[i]);//vacio
 				
 			}
 		}
