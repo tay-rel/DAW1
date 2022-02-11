@@ -1,4 +1,3 @@
-
 /**
  * Main.java
  * Programa principal del sistema para resolver un laberinto
@@ -6,12 +5,18 @@
  * version 0.1.0
  */
 import java.io.IOException;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 import Classes.Config;
 import Classes.Interface;
 import Classes.Session;
 import Classes.Labyrinth;
 
+/* @A.A.M.S - DAW1
+ * 
+ * 
+ */
 public class Main {
 	// Creamos objeto
 	public static Session session = new Session();
@@ -58,6 +63,7 @@ public class Main {
 	}
 
 	private static void loggedAction(int option) throws InterruptedException, IOException {
+	
 		// int miliseconds=2000;
 		switch (option) {
 		case 1:
@@ -71,13 +77,12 @@ public class Main {
 			Interface.toContinue();
 			break;
 		case 3:
-			labyrinth.showMap(); //muestro mapa para que el usuario pueda visualizar el laberinto y elegir E/S
+			labyrinth.showMap();
 			labyrinth.setEntraceExit();
-			Interface.toContinue();
 			Thread.sleep(Config.miliseconds);
 			break;
 		case 4:
-			System.out.println("\nLogin Proximamente");
+			labyrinth.selectAlgoritm();
 			Thread.sleep(Config.miliseconds);
 
 			break;
@@ -87,7 +92,9 @@ public class Main {
 			break;
 		case 6:
 			System.out.println("\nCerrando sesion");
-			session.logout();
+			labyrinth = new Labyrinth();
+			//session = new Session(); //instanciamos de nuevo 
+			session.logout();		//Para limpiarlo
 			// tiempo de espera
 			Thread.sleep(Config.miliseconds);
 			break;

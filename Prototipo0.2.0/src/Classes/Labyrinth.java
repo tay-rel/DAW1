@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import Classes.Config;
+import Classes.Interface;
 
 public class Labyrinth {
 
@@ -13,14 +15,16 @@ public class Labyrinth {
 	private char[][] map;
 	private String filename;
 	private boolean loaded;
+	private boolean setIO;
 	private int startI, startJ, endI, endJ;
+	private ArrayList<Coordinate> path = new ArrayList<Coordinate>(); // inicializo un ArrayList vacio
 
 	// constructor
 	public Labyrinth() {
 		loaded = false;
 	}
 
-	private File listDirectory() throws IOException {
+	private File listDirectory() throws IOException { // muestra las opciones a elegir de ficheros
 		Scanner entry = new Scanner(System.in);
 
 		File[] files = new File[0];
@@ -50,7 +54,10 @@ public class Labyrinth {
 
 	public void loadLabyrinth() throws IOException, InterruptedException {
 
+		System.out.println("\nLaberintos disponibles\n---------------------");
+
 		ArrayList<String> lines = new ArrayList<String>();
+
 		try {
 			File myObj = listDirectory();
 			Scanner myReader = new Scanner(myObj);
@@ -67,7 +74,7 @@ public class Labyrinth {
 					map[i][j] = lines.get(i).charAt(j); // guarda lo que hay linea [i]
 				}
 			}
-			filename = myObj.getName(); // Guarda el nombre
+			filename = myObj.getName(); // guarda el nombre
 
 			myReader.close();
 		} catch (FileNotFoundException e) {
@@ -83,8 +90,8 @@ public class Labyrinth {
 		try {
 
 			// recorre espacios linea de arriba
-
-			System.out.print("   ");
+			
+			System.out.print("Laberinto actual: "+filename+"\n");
 			for (int a = 0; a < map.length; a++) {
 				if (a < 10) {
 					System.out.print("  ");
@@ -123,14 +130,15 @@ public class Labyrinth {
 			}
 
 		} catch (Exception e) {
-			System.err.println("\nVuelva a intentarlo,porfavor.");
+			System.out.println("\nVuelva a intentarlo,porfavor");
 		}
 
 	}
 
 	public void setEntraceExit() {
-		if (loaded == false) { //Debe estar false porque
-			System.err.println("\nNo hay ningun laberinto cargado");
+
+		if (loaded == false) { // error y fin,porque no se ha cargado el laberinto
+			System.err.println("\nLo siento no hay ningun laberinto cargado");
 			return;
 		}
 		// reinicia las posiciones de las csasillas cuando se vueleve a inicializar
@@ -165,7 +173,9 @@ public class Labyrinth {
 
 			map[startI][endI] = 'E';
 			map[startJ][endJ] = 'S';
-			System.out.println("\nLos puntos se ha cargado correctamente\n ¡Bien hecho!");
+			setIO = true;// guardo la carga de E/S
+
+			System.out.println("\n\tLos puntos se ha cargado correctamente\n \t¡Bien hecho!");
 			return;
 		} catch (Exception e) {
 			System.err.println("Lo siento, los valores estan fuera de rango");
@@ -175,6 +185,29 @@ public class Labyrinth {
 			endJ = 0; // valores que se han metido fuera de rango
 			return;
 		}
+
+	}
+
+	/*----------------- Muestra Menu de Algoritmo -----------------*/
+	public void selectAlgoritm() {
+		if (loaded && setIO) { // Si el laberinto ya ha sido cargado
+			// Si ya se ha metido las coordenadas de E/S
+			int option = Interface.getInt(Config.algorithMenu);
+
+			switch (option) {
+			case 1:
+				System.out.println("En proceso"); // camino largo
+				break;
+			case 2:
+				System.out.println("En proceso"); // camino corto
+				break;
+			default:
+				break;
+			}
+
+		} // Se acaba el if
+
 	}
 
 }
+

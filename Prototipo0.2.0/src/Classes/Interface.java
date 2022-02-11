@@ -51,12 +51,13 @@ public class Interface {
 		}
 
 		// Metodo para que pida una accion para continuar
+		// Version 2
 		public static void toContinue() {
-			System.out.print("\nPulse cualquier tecla + enter para continuar ");
-			if(keyboard.next()==keyboard.nextLine()) {
-				keyboard.close();
+			System.out.print("\nPulse 'enter' para continuar");
+			try {
+				System.in.read();
+			} catch (Exception e) {
 			}
-			
 			
 	}
 }

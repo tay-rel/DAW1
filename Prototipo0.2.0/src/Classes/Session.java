@@ -119,7 +119,7 @@ public class Session { // controla los aspectos de control de usuario
 			if (username.equalsIgnoreCase(currentUser[0]) && password.equals(currentUser[1])) {
 				logged = true;
 				setUser(currentUser); // Array que se convirtio
-				System.out.println("\nSesion iniciada correctamente\n");
+				System.out.println("\n\tSesion iniciada correctamente\n");
 				break; // Deja de comprobar cuando lo encuentra
 			}
 		}
