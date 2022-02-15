@@ -2,13 +2,15 @@ package CadenaCaracteres;
 import java.util.Date;
 
 public class String08 {
+	/* no se puede mostrar todo el contenido 
+	 * debido a que la consola tiene un buffer de un tama�o limitado */
 	public static void main(String args[]) {
 		long marcaTiempo = new Date().getTime();
 		 
      	StringBuffer colector = new StringBuffer("Numeros: ");
      	for(int i = 1; i <= 50000; i++) {
      		// El metodo append() de StringBuilder y StringBuffer
-     		// es llamado automáticamente a menudo a través del operador +
+     		// es llamado automaticamente a menudo a traves del operador +
           	colector.append(i);
      	}
      	System.out.println("Tiempo: " + (new Date().getTime() - marcaTiempo) + " ms");

@@ -7,8 +7,9 @@ package CadenaCaracteres;public class String05 {
 }
 
 class Punto {
-	int x, y;
-	// Redefinición del método
+	int x=1, y=2;
+	
+	// Redefinicion del metodo
 	// Todas las clases disponen de un método toString() por defecto
 	// que se encuentra en la clase Object.
 	// Es conveniente redefinir toString() y presentar una

@@ -13,7 +13,7 @@ public class String07 {
 		
 		// StringBuilder
 		StringBuilder s1 = new StringBuilder("StringBuilder");		
-		s1.append(". Vamos por más");   //Se modifica el mismo objeto (no  se crea un nuevo String)
+		s1.append(". Vamos por mas");   //Se modifica el mismo objeto (no  se crea un nuevo String)
 		System.out.println(s1);
 
 		// StringBuffer

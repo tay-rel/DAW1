@@ -1,6 +1,7 @@
 package CadenaCaracteres;
 
-
+/*String inmutables:Una vez creados en memoria no pueden ser alterados
+ * ni se puede cambiar su valor */
 public class String01 {
 	static public void main(String[] args) {
 		String s1 = new String("Hola");
