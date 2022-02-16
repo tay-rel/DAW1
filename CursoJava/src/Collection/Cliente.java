@@ -1,5 +1,7 @@
 package Collection;
 
+import java.util.Objects;
+
 public class Cliente {
 	
 	//costructor-SegundoPaso
@@ -9,6 +11,22 @@ public class Cliente {
 		this.saldo=saldo;
 	}
 	
+	@Override
+	public int hashCode() {
+		return Objects.hash(n_cuenta);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cliente other = (Cliente) obj;
+		return Objects.equals(n_cuenta, other.n_cuenta);
+	}
+
 	//Cliente-PrimerPaso
 	private String nombre;
 	private String n_cuenta;
