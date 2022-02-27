@@ -16,7 +16,7 @@ public class Ejercicio01 {
 		for (int i = 0; i < listaCompra.size(); i++) {
 			System.out.format("%s\n", listaCompra.get(i));
 		}
-		System.out.format("Â¿Hay pan en la lista? %b", listaCompra.contains("Pan"));
+		System.out.format("¿Hay pan en la lista? %b", listaCompra.contains("Pan"));
 
 	}
 }
@@ -63,7 +63,7 @@ public class Ejercicio01 {
 
 	/**
 	 * Comprueba si el array si el array interno estÃ¡ casi lleno y lo copia
-	 * ampliando al doble su tamaÃ±o.
+	 * ampliando al doble su tamaño.
 	 */
 	private void comprobarLlenado() {
 		// El array interno estÃ¡ casi lleno, se duplica el espacio.
@@ -75,9 +75,9 @@ public class Ejercicio01 {
 	}
 
 	/**
-	 * Inserta un elemento en la posiciÃ³n especificada por el Ã­ndice.
+	 * Inserta un elemento en la posicion especificada por el Indice.
 	 * 
-	 * @param indice   - indica la posiciÃ³n de inserciÃ³n en la lista.
+	 * @param indice   - indica la posicion de insercion en la lista.
 	 * @param elemento - elemento a insertar.
 	 * @throws IndexOutOfBoundsException
 	 */
@@ -88,7 +88,7 @@ public class Ejercicio01 {
 		}
 		comprobarLlenado();
 
-		// InserciÃ³n, desplaza los elementos desde Ã­ndice indicado.
+		// InserciÃ³n, desplaza los elementos desde Indice indicado.
 		if (indice < numElementos) {
 			System.arraycopy(arrayElementos, indice, arrayElementos, indice + 1, numElementos - indice);
 		}
@@ -97,7 +97,7 @@ public class Ejercicio01 {
 	}
 
 	/**
-	 * Devuelve el Ã­ndice de la primera ocurrencia para el objeto especificado.
+	 * Devuelve el Indice de la primera ocurrencia para el objeto especificado.
 	 * 
 	 * @param elem - el elemento buscado.
 	 * @return el Ã­ndice del elemento o -1 si no lo encuentra.
