@@ -30,7 +30,13 @@ public class Principal {
 		} else {
 			System.err.println("El password '"+text2+"' no es valido");
 		}
-
+		/*----------Fecha-------*/
+		if(Utilidades.validarFecha(text3)) {
+			System.out.println("La fecha es valida");
+		}else {
+			System.out.println("La fecha no es valida");
+		}
+		
 	}
 
 }
