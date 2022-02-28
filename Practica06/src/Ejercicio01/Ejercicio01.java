@@ -153,13 +153,13 @@ public class Ejercicio01 {
 		return arrayElementos[indice];
 	}
 	/**
-	 * Elimina el elemento especificado en el Ã­ndice.
+	 * Elimina el elemento especificado en el Indice.
 	 * @param indice - del elemento a eliminar.
 	 * @return - el elemento eliminado.
 	* @exception IndexOutOfBoundsException - Ã­ndice no estÃ¡ entre 0 y numElementos-1.
 	 */
 	public Object remove(int indice) {
-	// El Ã­ndice debe ser vÃ¡lido para la lista.
+	// El indice debe ser va¡lido para la lista.
 	if (indice >= numElementos || indice < 0) {
 	throw new IndexOutOfBoundsException("Ã�ndice incorrecto: " + indice);
 	}
@@ -177,7 +177,7 @@ public class Ejercicio01 {
 	/**
 	 * Elimina el elemento especificado.
 	 * @param elemento - elemento a eliminar.
-	 * @return - el Ã­ndice del elemento eliminado o -1 si no existe.
+	 * @return - el Indice del elemento eliminado o -1 si no existe.
 	 */
 	public int remove(Object elem) {
 	int indice = indexOf(elem);
