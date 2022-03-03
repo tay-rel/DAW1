@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
@@ -22,16 +23,12 @@ public class Labyrinth2 {
 	private boolean setIO; // Establecer entrada y salida
 	private int startI, startJ, endI, endJ;
 	private ArrayList<Coordinate2> path = new ArrayList<Coordinate2>(); // inicializo un ArrayList vacio
-	private static int[][] direction = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
-	// public int count=0;
-	private final int ARRIBA = 1;
-	private final int ABAJO = 2;
-	private final int IZQUIERDA = 3;
-	private final int DERECHA = 4;
-	private int filas;
-	private int columnas;
-
-	private int[][] casillas;
+	private final int IZQUIERDA = 1;
+	private final int ARRIBA = 2;
+	private final int DERECHA = 3;
+	private final int ABAJO = 4;
+	
+	private boolean search;
 
 	// constructor
 	public Labyrinth2() {
@@ -128,8 +125,27 @@ public class Labyrinth2 {
 
 			}
 
-			System.out.println();
+			// Pinta el camino
+			if (search) {
+				if (map[startI][startJ] == 'E') {
+					map[startI][startJ] = 'E';
+				for (int i = 0; i < path.size(); i++) {
+					if (path.get(i).direction == IZQUIERDA) {
+						map[path.get(i).i][path.get(i).j] = '<';
+					} else if (path.get(i).direction == ARRIBA) {
+						map[path.get(i).i][path.get(i).j] = '^';
+					} else if (path.get(i).direction == DERECHA) {
+						map[path.get(i).i][path.get(i).j] = '>';
+					} else if (path.get(i).direction == ABAJO) {
+						map[path.get(i).i][path.get(i).j] = 'v';
+					}
+				}
+			}
+			
+				map[startI][startJ] = 'E';
+			}
 
+			System.out.println();
 			// bucle recorre map
 			for (int x = 0; x < map.length; x++) {
 				if (x < 10) {
@@ -157,36 +173,38 @@ public class Labyrinth2 {
 		}
 		// reinicia las posiciones de las csasillas cuando se vueleve a inicializar
 		if (startI != 0) {
-			map[startI][endI] = ' ';
-			map[startJ][endJ] = ' ';
+			map[startI][startJ] = ' ';
+			map[endI][endJ] = ' ';
 
 		}
 		// showMap(); // muestra el mapa
 		System.out.println("\nIntroduce la coordenadas de [E]ntrada / [S]alida");
-		startI = Interface2.getInt("Columna [E]: ");
-		endI = Interface2.getInt("Fila [E]: ");
-		startJ = Interface2.getInt("Columna [S]: ");
-		endJ = Interface2.getInt("Fila [S]: ");
+		startI = Interface2.getInt("Fila [E]: ");
+		startJ = Interface2.getInt("Columna [E]: ");
+		endI = Interface2.getInt("Fila [S]: ");
+		endJ = Interface2.getInt("Columna [S]: ");
 
 		try {
 			// si son iguales
-			if (startI == startJ && endI == endJ) {
-				System.err.println("\nLo siento los valores no son validos");
-				return;
-
-			}
+			
+			 /* if (startI == startJ && endI == endJ) {
+			  System.err.println("\nLo siento los valores no son validos"); return;
+			  
+			  }
+			 */
 			// entrada
-			if (map[startI][endI] != ' ') {
+			if (map[startI][startJ] != ' ') {
 				System.err.println("\n¡Opps! Te has encontrado con una pared");
 				return;
 			} // salida
-			if (map[startJ][endJ] != ' ') {
+			if (map[endI][endJ] != ' ') {
 				System.err.println("\n¡Opps! Te has encontrado con una pared");
 				return;
 			}
 
-			map[startI][endI] = 'E';
-			map[startJ][endJ] = 'S';
+			map[startI][startJ] = 'E';
+			map[endI][endJ] = 'S';
+			path = new ArrayList<Coordinate2>();// para limpiarlo
 			setIO = true;
 			System.out.println("\nLos puntos se ha cargado correctamente\n ¡Bien hecho!");
 			return;
@@ -203,26 +221,41 @@ public class Labyrinth2 {
 
 	public void selectAlgoritm() {
 
-		if (loaded && setIO) { // Si el laberinto ya ha sido cargado
-			// Si ya se ha metido las coordenadas de E/S
+		if (loaded && setIO) { // Si el laberinto ya ha sido cargado Y ya se ha metido las coordenadas de E/S
+
 			int option = Interface2.getInt(Config2.algorithMenu);
-			// System.out.println("Eliga una opcion: "+option);
 
 			switch (option) {
-			case 1://codigo del primer xamino posible para poder seleccionar en el algortimo 
-				findPath(false); 
-				/*
-				 * if(findPath(startI,startJ)) { printPath();
-				 * System.out.println("Camino encontrado");
-				 * 
-				 * }
-				 */
-				System.out.println("Camino encontrado");
-				showMap();
-					
+			case 1:// codigo del primer xamino posible para poder seleccionar en el algortimo
+				if (findPath(false)) {
+
+					// System.out.println(path.size());
+					System.out.println("Camino encontrado");
+
+					/*
+					 * for(Coordinate2 i : path) { System.out.println(i.i+", "+
+					 * i.j+" - "+i.direction); }
+					 */
+
+					step();
+					search = true;
+					showMap();
+
+				} else {
+					System.out.println("No encontrado");
+				}
 				break;
+
 			case 2:
-				System.out.println("En proceso"); // camino corto
+				 // camino corto
+				/*if(paso(false)) {
+					step();
+					search = true;
+					showMap();
+				}
+				 else {
+						System.out.println("No encontrado");
+					}*/
 				break;
 			default:
 				break;
@@ -235,134 +268,104 @@ public class Labyrinth2 {
 
 	}
 
-	// Comprueba si empieza esta en el punto de entrada
-	public boolean toBegin(int x, int y) {
-		if(map[x][y]=='E') {
-			return true;
-		}
-		
-		return false;
-	}
-
-	private Coordinate2 nextDirection(Coordinate2 next) {
-		Coordinate2 nextCoord=new Coordinate2();
-		
-		
-		return nextCoord;
-		
-	}
-	
-	public Coordinate2 direction(Coordinate2 coor) {
-		Coordinate2 toCome=new Coordinate2();
-		coor.i=filas; coor.j=columnas; 
-	
-			if(map[coor.i -1][coor.j]== ' ' ) {
-				coor.direction=1;
-			}
-			if(map[coor.j +1][coor.j]== ' ' ) {
-				coor.direction=2;
-			}
-			if(map[coor.i +1][coor.j]== ' ' ) {
-				coor.direction=3;
-			}
-			if(map[coor.j -1][coor.j]== ' ' ) {
-				coor.direction=4;
-			}
-		
-		
-		
-		return toCome;
-	}
-
-	
-	
-	/* ----------------- IMPLEMENTACIÓN DELCODIGO david ----------------- */
+	/*
+	 * ----------------- IMPLEMENTACIÓN DEL ALGORITMO PARA LOS CAMINOS* ----------------- */
+	 
 
 	public boolean findPath(boolean rigth) {
-		boolean found=false;
-		path=new ArrayList<Coordinate2>();
-		
-		//guarda en la casilla inicial en el camino
+		path = new ArrayList<Coordinate2>();
+
+		// guarda en la casilla inicial en el camino
 		Coordinate2 startCell = new Coordinate2();
-		//tiene valores asignados
-		startCell.i=startI;
-		startCell.j=startJ;
-		startCell.direction=0;
-		//ArrayList<Coordinate2> rigthPath= new ArrayList<Coordinate2>();
+		// tiene valores asignados
+		startCell.i = startI;
+		startCell.j = startJ;
+		startCell.direction = 0;
+		// ArrayList<Coordinate2> rigthPath= new ArrayList<Coordinate2>();
 		path.add(startCell);
-		
-		/*while(path.size()>0) {
-			System.out.println("*");
-		}*/
-		
-		while(!found && path.size()>0) {//algt
-			//incrementar la direccion 
-			path.get(path.size()-1).direction+=1;//accede al ultimo elemento
-			
-			if (path.get(path.size()-1).direction<=4) {
-				//comprobaciones casillas
-				Coordinate2 nextCell=setNextCell(path.get(path.size()-1));
+
+		while (  path.size() > 0) {// algt
+			// incrementar la direccion
+			path.get(path.size() - 1).direction += 1;// accede al ultimo elemento
+
+			if (path.get(path.size() - 1).direction <= 4) {
+				// comprobaciones casillas
+				Coordinate2 nextCell = setNextCell(path.get(path.size() - 1));
 				if (checkCell(nextCell)) {
-					//casilla valida
-					path.add(nextCell);	
+					// casilla valida
+					path.add(nextCell);
 				}
-				if (nextCell.i ==endI && nextCell.j==endJ) {//comprueba casiila de salida
-					found=true;
+				if (nextCell.i == endI && nextCell.j == endJ) {// comprueba casiila de salida
+					return true;
 				}
-				
+
 			} else {
-				path.remove(path.size()-1);//borra la ultima poscion 
-				
-				
-				
-			}
-		}	
-		
-		return true;
-		
-		
-	}
-		
-		/* ----------------- IMPLEMENTACIÓN DELCODIGO david ----------------- */
+				path.remove(path.size() - 1);// borra la ultima poscion
 
-		public Coordinate2 setNextCell(Coordinate2 currentCoord){
-			
-			Coordinate2 nextCoord=new Coordinate2();
-			nextCoord.i=currentCoord.i;
-			nextCoord.j=currentCoord.j;
-			nextCoord.direction=0;
-			//Comprobamos direction recibiendo la coordenada actual
-			if (currentCoord.direction==1) {//izquierda
-				nextCoord.j--;
-			} else if (currentCoord.direction==2) {//arriba
-				nextCoord.i--;
-			}else if (currentCoord.direction==3) {//derecha
-				nextCoord.j++;
-			}else if (currentCoord.direction==4) {//abajo
-				nextCoord.i++;
 			}
-			
-			
-			return nextCoord;
-			
-			
 		}
-		private boolean checkCell(Coordinate2 cell) {
-			
-			if (map[cell.i][cell.j] =='#') {//pared
-				return false;
-			}
-			for (int i = 0; i < path.size(); i++) {//comprueba si ya ha estado
-				if (path.get(i).i==cell.i && path.get(i).j==cell.j) {
-					return false;
-				} else {
 
-				}
-			}
-				
-			
 		return true;
-		
+
+	}
+
+	/* ----------------- IMPLEMENTACIÓN DELCODIGO david ----------------- */
+
+	public Coordinate2 setNextCell(Coordinate2 currentCoord) {
+
+		Coordinate2 nextCoord = new Coordinate2();
+		nextCoord.i = currentCoord.i;
+		nextCoord.j = currentCoord.j;
+		nextCoord.direction = 0;
+		// Comprobamos direction recibiendo la coordenada actual
+		if (currentCoord.direction == IZQUIERDA) {// izquierda
+			nextCoord.j--;
+		} else if (currentCoord.direction == ARRIBA) {// arriba
+			nextCoord.i--;
+		} else if (currentCoord.direction == DERECHA) {// derecha
+			nextCoord.j++;
+		} else if (currentCoord.direction == ABAJO) {// abajo
+			nextCoord.i++;
+		}
+
+		return nextCoord;
+
+	}
+
+	private boolean checkCell(Coordinate2 cell) {
+
+		if (map[cell.i][cell.j] == '#') {// pared
+			return false;
+		}
+		for (int i = 0; i < path.size(); i++) {// comprueba si ya ha estado
+			if (path.get(i).i == cell.i && path.get(i).j == cell.j) {
+				return false;
+			} else {
+
+			}
+		}
+
+		return true;
+
+	}
+
+	public void step() {
+		System.out.println("\nPasos: " + path.size());
+		System.out.println();
+		String direction = " ";
+		for (Coordinate2 i : path) {
+			if (i.direction == IZQUIERDA) {
+				direction = "Izquierda";
+			} else if (i.direction == ARRIBA) {
+				direction = "Arriba";
+			} else if (i.direction == DERECHA) {
+				direction = "Derecha";
+			} else if (i.direction == ABAJO) {
+				direction = "Abajo";
+			}
+			System.out.println("(" + i.i + ", " + i.j + ") - " + i.direction);
+		}
+
 	}
 
 }

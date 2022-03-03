@@ -1,5 +1,6 @@
 package SupuestoPractico6;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -15,21 +16,21 @@ public class Utilidades {
 
 	// Metodo que se utiliza para validar el email
 	public static boolean validarEmail(String email) {
-		return email.matches(regexEmail)?true:false;
+		return email.matches(regexEmail) ? true : false;
 	}
 
 	public static boolean validarPassword(String password) {
 
-		return password.matches(regexPassword)?true:false;
+		return password.matches(regexPassword) ? true : false;
 	}
 
 	public static boolean validarFecha(String fecha) {
 		try {
-			SimpleDateFormat formatoFecha=new SimpleDateFormat("dd/MM/yyyy",Locale.getDefault());
+			SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 			formatoFecha.setLenient(false);
 			formatoFecha.parse(fecha);
 		} catch (Exception e) {
-			
+
 			return false;
 		}
 

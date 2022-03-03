@@ -25,16 +25,16 @@ public class Principal {
 		
 		/*----------Password-------*/
 		
-		if (Utilidades.validarEmail(text)) {
+		if (Utilidades.validarPassword(text2)) {
 			System.out.println("El password '" + text2 + "' es valido");
 		} else {
-			System.err.println("El password '"+text2+"' no es valido");
+			System.err.println("El password '"+text2+"' debe teneral menos 8 caracteres, unamayuscula,un numero y un carcater especial");
 		}
 		/*----------Fecha-------*/
 		if(Utilidades.validarFecha(text3)) {
-			System.out.println("La fecha es valida");
+			System.out.println("La fecha es valida "+text3);
 		}else {
-			System.out.println("La fecha no es valida");
+			System.out.println("La fecha no es valida "+text3);
 		}
 		
 	}
