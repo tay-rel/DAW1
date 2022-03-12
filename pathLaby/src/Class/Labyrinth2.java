@@ -99,7 +99,6 @@ public class Labyrinth2 {
 	public void showMap() {
 
 		try {
-
 			// recorre espacios linea de arriba
 
 			System.out.print("   ");
@@ -128,7 +127,8 @@ public class Labyrinth2 {
 			// Pinta el camino
 			if (search) {
 				if (map[startI][startJ] == 'E') {
-					map[startI][startJ] = 'E';
+					//map[startI][startJ] = 'E';
+					
 				for (int i = 0; i < path.size(); i++) {
 					if (path.get(i).direction == IZQUIERDA) {
 						map[path.get(i).i][path.get(i).j] = '<';
@@ -158,6 +158,7 @@ public class Labyrinth2 {
 				}
 				System.out.println();
 			}
+			
 
 		} catch (Exception e) {
 			System.out.println("\nVuelva a intentarlo,porfavor");
@@ -175,7 +176,7 @@ public class Labyrinth2 {
 		if (startI != 0) {
 			map[startI][startJ] = ' ';
 			map[endI][endJ] = ' ';
-
+			
 		}
 		// showMap(); // muestra el mapa
 		System.out.println("\nIntroduce la coordenadas de [E]ntrada / [S]alida");
@@ -228,19 +229,13 @@ public class Labyrinth2 {
 			switch (option) {
 			case 1:// codigo del primer xamino posible para poder seleccionar en el algortimo
 				if (findPath(false)) {
-
 					// System.out.println(path.size());
-					System.out.println("Camino encontrado");
-
-					/*
-					 * for(Coordinate2 i : path) { System.out.println(i.i+", "+
-					 * i.j+" - "+i.direction); }
-					 */
-
-					step();
+					System.out.println("Camino encontrado");	
+					
 					search = true;
 					showMap();
-
+					step();
+					path = new ArrayList<Coordinate2>();
 				} else {
 					System.out.println("No encontrado");
 				}
@@ -248,14 +243,15 @@ public class Labyrinth2 {
 
 			case 2:
 				 // camino corto
-				/*if(paso(false)) {
+				if(secondPath(true)) {
 					step();
 					search = true;
 					showMap();
+					
 				}
 				 else {
 						System.out.println("No encontrado");
-					}*/
+					}
 				break;
 			default:
 				break;
@@ -284,7 +280,7 @@ public class Labyrinth2 {
 		// ArrayList<Coordinate2> rigthPath= new ArrayList<Coordinate2>();
 		path.add(startCell);
 
-		while (  path.size() > 0) {// algt
+		while (  path.size() > 0) {// algt	//if
 			// incrementar la direccion
 			path.get(path.size() - 1).direction += 1;// accede al ultimo elemento
 
@@ -308,8 +304,10 @@ public class Labyrinth2 {
 		return true;
 
 	}
+	
+	
 
-	/* ----------------- IMPLEMENTACIÓN DELCODIGO david ----------------- */
+	/* ----------------- IMPLEMENTACIÓN DEL CODIGO David ----------------- */
 
 	public Coordinate2 setNextCell(Coordinate2 currentCoord) {
 
@@ -363,8 +361,51 @@ public class Labyrinth2 {
 			} else if (i.direction == ABAJO) {
 				direction = "Abajo";
 			}
-			System.out.println("(" + i.i + ", " + i.j + ") - " + i.direction);
+			System.out.println("(" + i.i + ", " + i.j + ") - " + direction);
 		}
+
+	}
+	public boolean secondPath(boolean rigth) {
+		ArrayList<Coordinate2> prueba = new ArrayList<Coordinate2>();
+		path = new ArrayList<Coordinate2>();
+
+		// guarda en la casilla inicial en el camino
+		Coordinate2 startCell = new Coordinate2();
+		startCell.i = startI;
+		startCell.j = startJ;
+		startCell.direction = 0;
+		// ArrayList<Coordinate2> rigthPath= new ArrayList<Coordinate2>();
+		path.add(startCell);
+		
+
+		while (  path.size() > 0) {// algt	//if
+			// incrementar la direccion
+			path.get(path.size() - 1).direction += 1;// accede al ultimo elemento
+			
+			if (path.get(path.size() - 1).direction <= 4) {
+				// comprobaciones casillas
+				Coordinate2 nextCell = setNextCell(path.get(path.size() - 1));
+				if (checkCell(nextCell)) {
+					// casilla valida
+					path.add(nextCell);
+				}
+				if (nextCell.i == endI && nextCell.j == endJ) {// comprueba casiila de salida
+					return true;
+				}
+
+			} else {
+				path.remove(path.size() - 1);// borra la ultima poscion
+
+			}
+			
+		
+			
+			
+		}
+		
+		secondPath(rigth);
+
+		return true;
 
 	}
 

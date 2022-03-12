@@ -4,8 +4,11 @@ package Classes;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+
 import Classes.Config;
 import Classes.Interface;
 
@@ -18,6 +21,11 @@ public class Labyrinth {
 	private boolean setIO;
 	private int startI, startJ, endI, endJ;
 	private ArrayList<Coordinate> path = new ArrayList<Coordinate>(); // inicializo un ArrayList vacio
+	private final int left = 1;
+	private final int up = 2;
+	private final int right = 3;
+	private final int down = 4;
+	private boolean search;
 
 	// constructor
 	public Labyrinth() {
@@ -88,10 +96,10 @@ public class Labyrinth {
 	public void showMap() {
 
 		try {
-
-			// recorre espacios linea de arriba
+			System.out.print("Laberinto actual: " + filename + "\n");
 			
-			System.out.print("Laberinto actual: "+filename+"\n");
+			System.out.print("   ");
+			// recorre espacios linea de arriba
 			for (int a = 0; a < map.length; a++) {
 				if (a < 10) {
 					System.out.print("  ");
@@ -114,8 +122,28 @@ public class Labyrinth {
 
 			}
 
-			System.out.println();
+			/*------------Pinta el camino ----------*/
+			if (search) {
+				if (map[startI][startJ] == 'E') {
+					for (int i = 0; i < path.size(); i++) {
+						if (path.get(i).direction == left) {
+							map[path.get(i).i][path.get(i).j] = '<';
+						} else if (path.get(i).direction == up) {
+							map[path.get(i).i][path.get(i).j] = '^';
+						} else if (path.get(i).direction == right) {
+							map[path.get(i).i][path.get(i).j] = '>';
+						} else if (path.get(i).direction == down) {
+							map[path.get(i).i][path.get(i).j] = 'v';
+						}
+					}
+				}
 
+				map[startI][startJ] = 'E';
+			}
+
+			/*-----------------------------------*/
+
+			System.out.println();
 			// bucle recorre map
 			for (int x = 0; x < map.length; x++) {
 				if (x < 10) {
@@ -143,39 +171,33 @@ public class Labyrinth {
 		}
 		// reinicia las posiciones de las csasillas cuando se vueleve a inicializar
 		if (startI != 0) {
-			map[startI][endI] = ' ';
-			map[startJ][endJ] = ' ';
+			map[startI][startJ] = ' ';
+			map[endI][endJ] = ' ';
 
 		}
-		// showMap(); // muestra el mapa
-		System.out.println("\nIntroduce la coordenadas de [E]ntrada / [S]alida");
-		startI = Interface.getInt("Columna [E]: ");
-		endI = Interface.getInt("Fila [E]: ");
-		startJ = Interface.getInt("Columna [S]: ");
-		endJ = Interface.getInt("Fila [S]: ");
-
+			System.out.println("\nIntroduce la coordenadas");
+		startI = Interface.getInt("Fila [E]: ");
+		startJ = Interface.getInt("Columna [E]: ");
+		endI = Interface.getInt("Fila [S]: ");
+		endJ = Interface.getInt("Columna [S]: ");
+		//path = new ArrayList<Coordinate>();// Limpio Path
 		try {
-			// si son iguales
-			if (startI == startJ && endI == endJ) {
-				System.err.println("\nLo siento los valores no son validos");
-				return;
 
-			}
 			// entrada
-			if (map[startI][endI] != ' ') {
+			if (map[startI][startJ] != ' ') {
 				System.err.println("\n¡Opps! Te has encontrado con una pared");
 				return;
 			} // salida
-			if (map[startJ][endJ] != ' ') {
+			if (map[endI][endJ] != ' ') {
 				System.err.println("\n¡Opps! Te has encontrado con una pared");
 				return;
 			}
 
-			map[startI][endI] = 'E';
-			map[startJ][endJ] = 'S';
+			map[startI][startJ] = 'E';
+			map[endI][endJ] = 'S';
 			setIO = true;// guardo la carga de E/S
-
-			System.out.println("\n\tLos puntos se ha cargado correctamente\n \t¡Bien hecho!");
+			path = new ArrayList<Coordinate>();// Limpio Path
+			System.out.println("\n\tLos puntos se ha cargado correctamente\n \t\t¡Bien hecho!");
 			return;
 		} catch (Exception e) {
 			System.err.println("Lo siento, los valores estan fuera de rango");
@@ -190,13 +212,21 @@ public class Labyrinth {
 
 	/*----------------- Muestra Menu de Algoritmo -----------------*/
 	public void selectAlgoritm() {
-		if (loaded && setIO) { // Si el laberinto ya ha sido cargado
-			// Si ya se ha metido las coordenadas de E/S
+		if (loaded && setIO) { // Si el laberinto ya ha sido cargado y si ya se ha metido las coordenadas de
+								// E/S
+
 			int option = Interface.getInt(Config.algorithMenu);
 
 			switch (option) {
 			case 1:
-				System.out.println("En proceso"); // camino largo
+				if (findPath(true)) {
+					System.out.println("\n\tCamino encontrado");
+					step();
+					search = true;
+					showMap();
+				} else {
+					System.err.println("\nCamino no entontrado");
+				}
 				break;
 			case 2:
 				System.out.println("En proceso"); // camino corto
@@ -205,9 +235,92 @@ public class Labyrinth {
 				break;
 			}
 
-		} // Se acaba el if
+		}else {
+			System.err.println("Lo siento laberinto no esta cargado");
+		} 
+		// Se acaba el if
 
 	}
 
-}
+	public void step() {
+		System.out.println("\nPasos: " + path.size());
+		System.out.println();
+		String direction = " ";
+		for (Coordinate i : path) {
+			if (i.direction == left) {
+				direction = "Izquierda";
+			} else if (i.direction == up) {
+				direction = "Arriba";
+			} else if (i.direction == right) {
+				direction = "Derecha";
+			} else if (i.direction == down) {
+				direction = "Abajo";
+			}else if(i.direction== 0) {
+				direction="Final";
+			}
+			System.out.println("(" + i.i + ", " + i.j + ") - " + direction);
+		}
 
+	}
+
+	/*----------------- Implementacion Algoritmo de @David-----------------*/
+	private boolean findPath(boolean a) {
+		path = new ArrayList<Coordinate>();
+		Coordinate startCell = new Coordinate();// Guarda la casilla inicial en el camino
+		startCell.i = startI; // Valores asignados
+		startCell.j = startJ;
+		path.add(startCell); // accede alultimo elemento
+
+		while (path.size() > 0) {
+			path.get(path.size() - 1).direction += 1; // incremeta la direccion
+			if (path.get(path.size() - 1).direction <= 4) {
+				Coordinate nextCell = setNextCell(path.get(path.size() - 1));// Comprobacion de casillas
+				if (checkCell(nextCell)) {
+					path.add(nextCell); // borra la ultima posicion
+				}
+				if (nextCell.i == endI && nextCell.j == endJ) {// comprueba casiila de salida
+					return true;
+				}
+
+			} else {
+				path.remove(path.size() - 1); // borra la ultima posicion
+			}
+
+		}
+		return true;
+	}
+
+	private Coordinate setNextCell(Coordinate currentCoord) {
+		Coordinate nextCoord = new Coordinate();
+		nextCoord.i = currentCoord.i;
+		nextCoord.j = currentCoord.j;
+		// Comprobamos direction recibiendo la coordenada actual
+		if (currentCoord.direction == left) {// izquierda
+			nextCoord.j--;
+		} else if (currentCoord.direction == up) {// arriba
+			nextCoord.i--;
+		} else if (currentCoord.direction == right) {// derecha
+			nextCoord.j++;
+		} else if (currentCoord.direction == down) {// abajo
+			nextCoord.i++;
+		}
+
+		return nextCoord;
+	}
+
+	private boolean checkCell(Coordinate cell) {
+		if (map[cell.i][cell.j] == '#') {// pared
+			return false;
+		}
+		for (int i = 0; i < path.size(); i++) {// comprueba si ya ha estado
+			if (path.get(i).i == cell.i && path.get(i).j == cell.j) {
+				return false;
+			} else {
+
+			}
+		}
+
+		return true;
+	}
+
+}

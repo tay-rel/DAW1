@@ -11,7 +11,7 @@ public class Ejercicio20 {
 		do {
 
 			// MENU
-			System.out.println("\t MENÚ");
+			System.out.println("\t MENUS");
 			System.out.println("1: Sumar");
 			System.out.println("2: Restar");
 			System.out.println("3: Multiplicar");
@@ -24,7 +24,7 @@ public class Ejercicio20 {
 			switch (num) {
 
 			case 1:
-				System.out.println("Introduzca el primer número");
+				System.out.println("Introduzca el primer numero");
 				operacion1 = entrada.nextInt();
 				System.out.println("Introduzca el segundo numero");
 				operacion2 = entrada.nextInt();
@@ -32,21 +32,21 @@ public class Ejercicio20 {
 
 				break;
 			case 2:
-				System.out.println("Introduzca el primer número");
+				System.out.println("Introduzca el primer numero");
 				operacion1 = entrada.nextInt();
 				System.out.println("Introduzca el segundo numero");
 				operacion2 = entrada.nextInt();
 				System.out.println("Resultado: " + (operacion1 - operacion2));
 				break;
 			case 3:
-				System.out.println("Introduzca el primer número");
+				System.out.println("Introduzca el primer numero");
 				operacion1 = entrada.nextInt();
 				System.out.println("Introduzca el segundo numero");
 				operacion2 = entrada.nextInt();
 				System.out.println("Resultado: " + (operacion1 * operacion2));
 				break;
 			case 4:
-				System.out.println("Introduzca el primer número");
+				System.out.println("Introduzca el primer numero");
 				operacion1 = entrada.nextInt();
 				System.out.println("Introduzca el segundo numero");
 				operacion2 = entrada.nextInt();

@@ -26,14 +26,14 @@ public class Ejercicio01 {
 	// Atributos
 	private Object[] arrayElementos;
 	private int numElementos;
-	private static final int TAMAÃ‘O_INICIAL = 4;
+	private static final int TAMAÑO_INICIAL = 4;
 
 	// MÃƒÂ©todos
 	/**
 	 * Inicializa el array de elementos de la lista.
 	 */
 	public ListaArray() {
-		arrayElementos = new Object[TAMAÃ‘O_INICIAL];
+		arrayElementos = new Object[TAMAÑO_INICIAL];
 		numElementos = 0;
 	}
 
@@ -123,7 +123,7 @@ public class Ejercicio01 {
 	 * Borra todos los elementos de la lista.
 	 */
 	public void clear() {
-		arrayElementos = new Object[TAMAÃ‘O_INICIAL];
+		arrayElementos = new Object[TAMAÑO_INICIAL];
 		numElementos = 0;
 	}
 

@@ -23,6 +23,6 @@ public class Config {// Guarda propiedades estaticas
 			+ "3. Establecer casillas de entrada y salida\n" + "4. Buscar caminos\n" + "5. Ver usuario actual\n"
 			+ "6. Cerrar sesión\n0. Salir\n" + "\nSeleccione una opción: ";
 	public static final String algorithMenu = "\n\t<<<Selelcciona un camino>>>\n\t------------------------"
-			+ "\n1- Primer camino posible \n" + "2- El camino mas corto\n" + "0- Salir\n";
+			+ "\n1- Primer camino posible \n" + "2- El camino mas corto\n" + "0- Salir\n"+ "\nSeleccionar una opción: ";
 
 }
