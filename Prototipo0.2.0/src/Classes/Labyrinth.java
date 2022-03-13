@@ -175,6 +175,7 @@ public class Labyrinth {
 			map[endI][endJ] = ' ';
 
 		}
+		
 			System.out.println("\nIntroduce la coordenadas");
 		startI = Interface.getInt("Fila [E]: ");
 		startJ = Interface.getInt("Columna [E]: ");
@@ -192,18 +193,23 @@ public class Labyrinth {
 				System.err.println("\n¡Opps! Te has encontrado con una pared");
 				return;
 			}
-
+			// Limpio Path
+			for (Coordinate cs : path) {
+				map[cs.i][cs.j]=' ';
+			}
+			path = new ArrayList<Coordinate>();// Limpio Path
+			
 			map[startI][startJ] = 'E';
 			map[endI][endJ] = 'S';
 			setIO = true;// guardo la carga de E/S
-			path = new ArrayList<Coordinate>();// Limpio Path
+			
 			System.out.println("\n\tLos puntos se ha cargado correctamente\n \t\t¡Bien hecho!");
 			return;
 		} catch (Exception e) {
 			System.err.println("Lo siento, los valores estan fuera de rango");
 			startI = 0;
-			endI = 0;
 			startJ = 0;
+			endI = 0;
 			endJ = 0; // valores que se han metido fuera de rango
 			return;
 		}
@@ -221,11 +227,12 @@ public class Labyrinth {
 			case 1:
 				if (findPath(true)) {
 					System.out.println("\n\tCamino encontrado");
-					step();
 					search = true;
 					showMap();
+					step();
+					
 				} else {
-					System.err.println("\nCamino no entontrado");
+					System.err.println("\n\tCamino no entontrado");
 				}
 				break;
 			case 2:
