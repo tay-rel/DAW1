@@ -42,7 +42,7 @@ public class Morado_3_19 {
 	}
 	
 	static String contarCaracteresPalabrasLineas(String text) {
-		int characters = text.replaceAll("\s+", "").replace("\n", "").replace("\t", "").replace("\\n", "").replace("\\t", "").length();
+		int characters = text.replaceAll("\\s+", "").replace("\n", "").replace("\t", "").replace("\\n", "").replace("\\t", "").length();
 		
 		String[] textFormat = text.replaceAll("\\s+", ",").replaceAll("\\n", "").replaceAll("\\t", "").split(","); 
 		int words = textFormat.length;
