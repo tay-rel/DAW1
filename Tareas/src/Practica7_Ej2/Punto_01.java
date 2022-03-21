@@ -8,10 +8,10 @@ public class Punto_01 {
 		
 		
 		
-		Punto p=new Punto(3,-4);
+		Punto p=new Punto(0,4);
 		
 		System.out.println("Su coordenada ( " + p.getX()+", "+ p.getY()+" ) ");
-		System.out.println("Esta ubicada "+p.calcularCuadrante() +" º en el cuadrante");
+		System.out.println("Esta ubicada "+p.calcularCuadrante() +" en el cuadrante");
 	}
   
 }
@@ -52,6 +52,8 @@ class Punto{
 	      return 0;
 	    }
 	  }
+	  
+	  //valoidar si esta en el eje de coordenadas
 
 }
 
