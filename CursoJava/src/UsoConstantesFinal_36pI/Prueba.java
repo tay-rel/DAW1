@@ -1,11 +1,11 @@
 package UsoConstantesFinal_36pI;
 
 public class Prueba {
-/*Static sera compartida por todos los objetos que estemos utilizando. 
- * FINAL el valor de algo , no se puede modificar.*/
-	
-	
-	
+	/*
+	 * Static sera compartida por todos los objetos que estemos utilizando. FINAL el
+	 * valor de algo , no se puede modificar.
+	 */
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
