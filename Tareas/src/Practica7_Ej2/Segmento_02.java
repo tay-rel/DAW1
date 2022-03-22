@@ -53,6 +53,7 @@ class SegmentoRecta{
 	
 	
 	public double getX0() {
+		
 		return x0;
 	}
 	public double getX1() {
