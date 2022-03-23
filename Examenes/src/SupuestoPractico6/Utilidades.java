@@ -12,7 +12,7 @@ public class Utilidades {
 
 	// propiedades
 	static String regexEmail = "^[\\w-\\+]+(\\.[\\w-\\+]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-	static String regexPassword = "(?=.*[A-ZÑ])(?=.*[a-zñ])(?=.*\\d)(?=.+[$*-+&!?%]).{8,}";
+	static String regexPassword = "(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.+[$*-+&!?%]).{8,}";
 
 	// Metodo que se utiliza para validar el email
 	public static boolean validarEmail(String email) {
