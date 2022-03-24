@@ -71,16 +71,16 @@ public class Session { // controla los aspectos de control de usuario
 
 			if (!user.username.equals(currentUser[0])) {
 
-				user.password = Interface.getString("Contraseña: ") + "#";
+				user.password = Interface.getString("Contraseï¿½a: ") + "#";
 				user.name = Interface.getString("Nombre completo: ") + "#";
-				user.age = Interface.getString("Edad: ") + "#";
+				
 				user.nif = Interface.getString("NIF: ") + "#";
-				user.email = Interface.getString("Correo electrónico: ") + "#";
-				user.address = Interface.getString("Dirección: ") + "#";
+				user.email = Interface.getString("Correo electrï¿½nico: ") + "#";
+				user.address = Interface.getString("Direcciï¿½n: ") + "#";
 				user.birthdate = Interface.getString("Fecha de nacimiento: ") + "#";
 				user.role = "user: ";
 
-				writeUsersFile(user.username + "#" + user.password + user.name + user.age + user.nif + user.email
+				writeUsersFile(user.username + "#" + user.password + user.name + user.nif + user.email
 						+ user.address + user.birthdate + user.role);
 				break;
 			} else {
@@ -134,12 +134,11 @@ public class Session { // controla los aspectos de control de usuario
 
 		this.user.username = currentUser[0];
 		this.user.name = currentUser[2];
-		this.user.age = currentUser[3];
-		this.user.nif = currentUser[4];
-		this.user.email = currentUser[5];
-		this.user.address = currentUser[6];
-		this.user.birthdate = currentUser[7];
-		this.user.role = currentUser[8];
+		this.user.nif = currentUser[3];
+		this.user.email = currentUser[4];
+		this.user.address = currentUser[5];
+		this.user.birthdate = currentUser[6];
+		this.user.role = currentUser[7];
 
 	}
 
@@ -171,16 +170,26 @@ public class Session { // controla los aspectos de control de usuario
 
 		System.out.println("Usuario : " + user.username);
 		System.out.println("Nombre: " + user.name);
-		System.out.println("Edad: " + user.age);
+	
 		System.out.println("NIF/NIE: " + user.nif);
 		System.out.println("Email:" + user.email);
-		System.out.println("Dirección: " + user.address);
+		System.out.println("Direcciï¿½n: " + user.address);
 		System.out.println("Fecha de nacimiento: " + user.birthdate);
 		System.out.println("Role" + user.role);
 		// Para pulsar una tecla
 		Interface.toContinue();
 
 	}
+	
+	
+	/*public String signup() {
+		String message ="No se ha podido completar el registro";
+		String data[]=new String[8];
+		data[7]="User";
+		
+		data[0]=Interface.getString();
+				
+	}*/
 
 	// cerrar session
 	public void logout() {
