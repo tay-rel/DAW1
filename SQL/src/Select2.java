@@ -5,6 +5,10 @@ import java.sql.Statement;
 import java.util.Scanner;
 
 public class Select2 {
+	private static final String driver="com.mysql.cj.jdbc.Driver";
+	private static final String url="jdbc:mysql://127.0.0.1:3306/agenda";
+	private static final String user="root";
+	private static final String pass="ariel";
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -16,8 +20,8 @@ public class Select2 {
 	}
 	public static void lanzarConsulta(String nom) {
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");	
-			Connection conn =DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/agenda","root", "ariel");//clase objeto de tipo coneccion
+			Class.forName(driver);	
+			Connection conn =DriverManager.getConnection(url,user,pass );//clase objeto de tipo coneccion
 			Statement stmt=conn.createStatement();
 			ResultSet rs =stmt.executeQuery("SELECT * FROM contactos WHERE name LIKE '%"+ nom + "%';");
 			
