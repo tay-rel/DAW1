@@ -76,7 +76,7 @@ public class Session { // controla los aspectos de control de usuario
 		System.out.println("NIF/NIE: " + user.nif);
 		System.out.println("Email:" + user.email);
 		System.out.println("Direccion: " + user.address);
-		System.out.println("Fecha de nacimiento: " + user.birthdate);
+		System.out.println("Fecha de nacimiento: " + user.birthdate + Utils.getAge(user.birthdate));
 		System.out.println("Role" + user.role);
 		// Para pulsar una tecla
 		Interface.toContinue();

@@ -32,8 +32,9 @@ public class Select2 {
 						+rs.getString("name")+" "+rs.getString("email")+" "+rs.getString("telefono"));
 				
 				//todos los datos se mete en una variable de tipo obejto User 
+				//logged =true ;
+				
 			}
-			//logged =true ;
 			
 			stmt.close();
 			conn.close();

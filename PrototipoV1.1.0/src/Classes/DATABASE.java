@@ -6,13 +6,19 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class DATABASE {
+	private static final String driver="com.mysql.cj.jdbc.Driver";
+	private static final String url="jdbc:mysql://127.0.0.1:3306/agenda";
+	private static final String user="root";
+	private static final String pass="ariel";
+	
+	public static String plantilla ="INSERT INTO contactos(name, email, telefono) VALUES ('<<nombre>>', '<<email>>', '<<telefono>>');";
 
 	public User login(String username, String password) {
 
 		try {
 
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/agenda", "root", "ariel");// clase
+			Class.forName(driver);
+			Connection conn = DriverManager.getConnection(url, user , pass);// clase
 																													// //
 																													// coneccion
 			Statement stmt = conn.createStatement();

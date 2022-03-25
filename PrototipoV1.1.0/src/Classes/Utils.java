@@ -4,6 +4,9 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 public class Utils {
@@ -27,7 +30,7 @@ public class Utils {
 
 	public static boolean validateFecha(String date) {
 		try {
-			SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+			SimpleDateFormat formatDate = new SimpleDateFormat("yyyy/MM/d", Locale.getDefault());
 			formatDate.setLenient(false);
 			formatDate.parse(date);
 		} catch (Exception e) {
@@ -36,6 +39,18 @@ public class Utils {
 		}
 
 		return true;
+	}
+	
+	public static int getAge(String birthdate) {
+		
+		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy/MM/d");
+		LocalDate fechaNac = LocalDate.parse(birthdate, fmt);
+		LocalDate ahora = LocalDate.now();
+
+		Period periodo = Period.between(fechaNac, ahora);
+		
+		           return    periodo.getYears();
+		
 	}
 
 	public static boolean validateUsername(String username) {
