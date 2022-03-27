@@ -10,7 +10,7 @@ public class Ejercicio02 {
 		
 		Guitarra gui= new Guitarra();
 		gui.showI();
-		Zampoña za=new Zampoña();
+		Zamponia za=new Zamponia();
 		za.showI();
 		Tambor ta=new Tambor();
 		ta.showI();
@@ -21,7 +21,7 @@ public class Ejercicio02 {
 
 class InstrumentoMusical{
 	public String tipo;
-	public String tamaño;
+	public String tamanio;
 	public String sonido;
 	
 	public void showI() {
@@ -31,14 +31,14 @@ class InstrumentoMusical{
 
 class Guitarra{
 	public String cuerdas;
-	public String tamaño;
+	public String tamanio;
 	public void showI() {
 		System.out.println("Es un instrumento de cuerda");
 	}
 	
 }
-class Zampoña{
-	public String tamaño;
+class Zamponia{
+	public String tamanio;
 	public String tubos;
 	public void showI() {
 		System.out.println("ES un instrumento de viento ");
@@ -46,7 +46,7 @@ class Zampoña{
 }
 class Tambor{
 	public String tipo;
-	public String tamaño;
+	public String tamanio;
 	public void showI() {
 		System.out.println("Es un instrumento de percusion");
 	}

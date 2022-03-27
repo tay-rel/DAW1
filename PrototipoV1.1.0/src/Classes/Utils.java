@@ -16,7 +16,7 @@ public class Utils {
 	static String regexPassword = "(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.+[$*-+&!?%]).{8,}";
 	static String regexNIF = "^[0-9]{8,8}[A-Za-z]$";
 	static String regexUsername = "^[A-Za-z]{3,9}";
-	static String regexName = "^[a-zA-ZÃ€-Ã¿\\u00f1\\u00d1]+(\\s*[a-zA-ZÃ€-Ã¿\\u00f1\\u00d1]*)*[a-zA-ZÃ€-Ã¿\\u00f1\\u00d1]+$";
+	static String regexName = "^[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+(\\s*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]*)*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+$";
 
 	// Metodo que se utiliza para validar el email
 	public static boolean validateEmail(String email) {
@@ -30,7 +30,7 @@ public class Utils {
 
 	public static boolean validateFecha(String date) {
 		try {
-			SimpleDateFormat formatDate = new SimpleDateFormat("yyyy/MM/d", Locale.getDefault());
+			SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-d", Locale.getDefault());
 			formatDate.setLenient(false);
 			formatDate.parse(date);
 		} catch (Exception e) {
@@ -43,7 +43,7 @@ public class Utils {
 	
 	public static int getAge(String birthdate) {
 		
-		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy/MM/d");
+		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-d");
 		LocalDate fechaNac = LocalDate.parse(birthdate, fmt);
 		LocalDate ahora = LocalDate.now();
 
