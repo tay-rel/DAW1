@@ -51,16 +51,50 @@ public class Session { // controla los aspectos de control de usuario
 			data[4] = Interface.getString("Email: ");
 			data[5] = Interface.getString("Direccion: ");
 			data[6] = Interface.getString("Fecha de nacmiento: ");
-			data[7] = "user";
+			;
 			
+			if (DATABASE.chekUser(data[0])==false) {
+				System.out.println("El usuario ya existe");
+				return;
+			}
 		
-		Utils.validateUsername(data[0]);
-		Utils.validatePassword(data[1]);
-		Utils.validateName(data[2]);
-		Utils.validateDni(data[3]);
-		Utils.validateEmail(data[4]);
-		Utils.validateFecha(data[5]);
+		if(Utils.validateUsername(data[0])==false) {
+			System.err.println("El formato de la username no es correcto");
+			return;
+		}
+		
+		if(Utils.validatePassword(data[1]) == false) {
+			System.err.println("El formato de la contraseña no es correcto");
+			return;
+		}
+			//return;
+		
+		if(Utils.validateName(data[2])==false) {
+			System.err.println("El formato de la nombre no es correcto");
+			return;
+		}
+		if(Utils.validateDni(data[3])==false) {
+			System.err.println("El formato del DNI no es correcto");
+			return;
+		}
+		
+		if(Utils.validateEmail(data[4])==false) {
+			System.err.println("El formato del email no es correcto");
+			return;
+		}
+		
+		if(Utils.validateFecha(data[5])==false) {
+			System.err.println("El formato de la Fecha no es correcto");
+			return;
+		}
+		
 	
+		try {
+			String date=DATABASE.singUp(data[0], data[1], data[2], data[3], data[4], data[5], data[6]);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		
@@ -78,16 +112,7 @@ public class Session { // controla los aspectos de control de usuario
 
 	}
 
-	public static boolean chekUser(String username) {
-		boolean found = false;
-
-		if (username.length() > 0) {
-			found = true;
-		}
-
-		return found;
-
-	}
+	
 
 	// metodo que se encarga de hacer Login
 	public  void login() {
@@ -95,11 +120,17 @@ public class Session { // controla los aspectos de control de usuario
 		String username = Interface.getString("\nIntroduce usuario: "); // paso1
 		String password = Interface.getString("Introduce password: "); // paso2
 
-		boolean log = false;
-
+		
 		if (username.length() > 0 && password.length() > 0) {
-			User date = new DATABASE().login(username, Utils.getMD5(password));
-			log = true;
+			
+			user = DATABASE.login(username, Utils.getMD5(password));
+			
+			if (user != null) {
+				this.logged =true;
+			}
+			
+			
+			System.out.println(user.username);
 		}
 
 	}
