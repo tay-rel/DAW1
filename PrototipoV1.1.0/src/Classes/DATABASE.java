@@ -11,7 +11,7 @@ public class DATABASE {
 	private static final String user = "root";
 	private static final String pass = "ariel";
 
-	public static String plantilla = "INSERT INTO users(username,password, name, nif, email, address, birthdate,role) VALUES ('<<Username>>','<<Password>>','<<Nombre>>', '<<NIF>>', '<<Email>>', '<<Direccion>>', '<<Fecha de Nacimiento>>', 'role');";
+	public static String plantilla = "INSERT INTO users(username,password, name, nif, email, address, birthdate) VALUES ('<<Username>>','<<Password>>','<<Nombre>>', '<<NIF>>', '<<Email>>', '<<Direccion>>', '<<Fecha de Nacimiento>>');";
 
 	public static String singUp(String username, String password, String name, String nif, String email, String address,
 			String birthdate) {
@@ -62,6 +62,7 @@ public class DATABASE {
 
 			User user = new User(); // todos los datos se mete en una variable de tipo objeto User
 			while (rs.next()) { // si encuentra algo entra a while
+				user.id=rs.getInt("id");
 				user.username=rs.getString("username");
 				user.name = rs.getString("name");
 				user.nif = rs.getString("nif");

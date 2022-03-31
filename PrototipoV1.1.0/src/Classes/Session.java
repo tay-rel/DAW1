@@ -82,7 +82,7 @@ public class Session { // controla los aspectos de control de usuario
 		data[5] = Interface.getString("Direccion: ");
 		
 		data[6] = Interface.getString("Fecha de nacmiento: ");
-		if (Utils.validateFecha(data[6]) == false) {
+		if (Utils.validateDate(data[6]) == false) {
 			System.err.println("El formato de la Fecha no es correcto");
 			return;
 		}
