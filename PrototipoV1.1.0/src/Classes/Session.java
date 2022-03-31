@@ -45,18 +45,19 @@ public class Session { // controla los aspectos de control de usuario
 
 			String data[] = new String[7];
 			data[0] = Interface.getString("\nNombre de usuario: " );
+
+			if (DATABASE.chekUser(data[0])==false) {
+				System.out.println("El usuario ya existe");
+				return;
+			}
 			data[1] = Interface.getString("Password: ");
 			data[2] = Interface.getString("Nombre Completo: ");
 			data[3] = Interface.getString("NIF: ");
 			data[4] = Interface.getString("Email: ");
 			data[5] = Interface.getString("Direccion: ");
 			data[6] = Interface.getString("Fecha de nacmiento: ");
-			;
 			
-			if (DATABASE.chekUser(data[0])==false) {
-				System.out.println("El usuario ya existe");
-				return;
-			}
+			
 		
 		if(Utils.validateUsername(data[0])==false) {
 			System.err.println("El formato de la username no es correcto");
@@ -130,7 +131,7 @@ public class Session { // controla los aspectos de control de usuario
 			}
 			
 			
-			System.out.println(user.username);
+			//System.out.println(user.username);
 		}
 
 	}
