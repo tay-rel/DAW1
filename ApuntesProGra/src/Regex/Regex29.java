@@ -33,7 +33,7 @@ public class Regex29 {
 		System.out.println(validateDni("45454542v"));
 		System.out.println(validateName("Tay"));
 		System.out.println(getMD5("1234"));
-		System.out.println(validateFecha("1997/04/01"));
+		System.out.println(validateFecha("1997-04-01"));
 		System.out.println(getAge("2002/07/05"));
 	}
 
@@ -73,7 +73,7 @@ public class Regex29 {
 	
 	public static boolean validateFecha(String date) {
 		try {
-			SimpleDateFormat formatDate = new SimpleDateFormat("yyyy/MM/d", Locale.getDefault());
+			SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-d", Locale.getDefault());
 			formatDate.setLenient(false);
 			formatDate.parse(date);
 		} catch (Exception e) {
