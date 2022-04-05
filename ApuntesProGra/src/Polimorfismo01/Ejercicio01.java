@@ -36,7 +36,7 @@ class Perro extends Animal{
 }
 
 class Gato extends Animal{
-	public String uñas;
+	public String unias;
 	public void sonidoAnimal() {
 		System.out.println("El gato hace MIAU MIAU");
 	}

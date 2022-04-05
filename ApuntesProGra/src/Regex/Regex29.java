@@ -34,7 +34,11 @@ public class Regex29 {
 		System.out.println(validateName("Tay"));
 		System.out.println(getMD5("1234"));
 		System.out.println(validateFecha("1997-04-01"));
+
 		System.out.println(getAge("2002-07-05"));
+
+		System.out.println(getAge("2002/07/05"));
+
 	}
 
 	public static boolean validateUsername(String username) {

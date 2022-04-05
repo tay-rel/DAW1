@@ -51,11 +51,11 @@ public class Main {
 
 		switch (option) {
 		case 1:
-			//session.login();
+			session.login();
 			Thread.sleep(Config.miliseconds);
 			break;
 		case 2:
-			//session.singUp();
+			session.singUp();
 			Thread.sleep(Config.miliseconds);
 			break;
 		}

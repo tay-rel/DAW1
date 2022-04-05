@@ -27,7 +27,7 @@ public class Labyrinth2 {
 	private final int ARRIBA = 2;
 	private final int DERECHA = 3;
 	private final int ABAJO = 4;
-	
+
 	private boolean search;
 
 	// constructor
@@ -127,21 +127,21 @@ public class Labyrinth2 {
 			// Pinta el camino
 			if (search) {
 				if (map[startI][startJ] == 'E') {
-					//map[startI][startJ] = 'E';
-					
-				for (int i = 0; i < path.size(); i++) {
-					if (path.get(i).direction == IZQUIERDA) {
-						map[path.get(i).i][path.get(i).j] = '<';
-					} else if (path.get(i).direction == ARRIBA) {
-						map[path.get(i).i][path.get(i).j] = '^';
-					} else if (path.get(i).direction == DERECHA) {
-						map[path.get(i).i][path.get(i).j] = '>';
-					} else if (path.get(i).direction == ABAJO) {
-						map[path.get(i).i][path.get(i).j] = 'v';
+					// map[startI][startJ] = 'E';
+
+					for (int i = 0; i < path.size(); i++) {
+						if (path.get(i).direction == IZQUIERDA) {
+							map[path.get(i).i][path.get(i).j] = '<';
+						} else if (path.get(i).direction == ARRIBA) {
+							map[path.get(i).i][path.get(i).j] = '^';
+						} else if (path.get(i).direction == DERECHA) {
+							map[path.get(i).i][path.get(i).j] = '>';
+						} else if (path.get(i).direction == ABAJO) {
+							map[path.get(i).i][path.get(i).j] = 'v';
+						}
 					}
 				}
-			}
-			
+
 				map[startI][startJ] = 'E';
 			}
 
@@ -158,7 +158,6 @@ public class Labyrinth2 {
 				}
 				System.out.println();
 			}
-			
 
 		} catch (Exception e) {
 			System.out.println("\nVuelva a intentarlo,porfavor");
@@ -176,7 +175,7 @@ public class Labyrinth2 {
 		if (startI != 0) {
 			map[startI][startJ] = ' ';
 			map[endI][endJ] = ' ';
-			
+
 		}
 		// showMap(); // muestra el mapa
 		System.out.println("\nIntroduce la coordenadas de [E]ntrada / [S]alida");
@@ -187,11 +186,12 @@ public class Labyrinth2 {
 
 		try {
 			// si son iguales
-			
-			 /* if (startI == startJ && endI == endJ) {
-			  System.err.println("\nLo siento los valores no son validos"); return;
-			  
-			  }
+
+			/*
+			 * if (startI == startJ && endI == endJ) {
+			 * System.err.println("\nLo siento los valores no son validos"); return;
+			 * 
+			 * }
 			 */
 			// entrada
 			if (map[startI][startJ] != ' ') {
@@ -230,8 +230,8 @@ public class Labyrinth2 {
 			case 1:// codigo del primer xamino posible para poder seleccionar en el algortimo
 				if (findPath(false)) {
 					// System.out.println(path.size());
-					System.out.println("Camino encontrado");	
-					
+					System.out.println("Camino encontrado");
+
 					search = true;
 					showMap();
 					step();
@@ -242,16 +242,16 @@ public class Labyrinth2 {
 				break;
 
 			case 2:
-				 // camino corto
-				if(secondPath(true)) {
-					step();
+				// camino corto
+				if (secondPath(true)) {
+
 					search = true;
 					showMap();
-					
+					step();
+					System.out.println("<<<Fin>>>");
+				} else {
+					System.out.println("No encontrado");
 				}
-				 else {
-						System.out.println("No encontrado");
-					}
 				break;
 			default:
 				break;
@@ -265,8 +265,9 @@ public class Labyrinth2 {
 	}
 
 	/*
-	 * ----------------- IMPLEMENTACIÓN DEL ALGORITMO PARA LOS CAMINOS* ----------------- */
-	 
+	 * ----------------- IMPLEMENTACIÓN DEL ALGORITMO PARA LOS CAMINOS*
+	 * -----------------
+	 */
 
 	public boolean findPath(boolean rigth) {
 		path = new ArrayList<Coordinate2>();
@@ -280,7 +281,7 @@ public class Labyrinth2 {
 		// ArrayList<Coordinate2> rigthPath= new ArrayList<Coordinate2>();
 		path.add(startCell);
 
-		while (  path.size() > 0) {// algt	//if
+		while (path.size() > 0) {// algt //if
 			// incrementar la direccion
 			path.get(path.size() - 1).direction += 1;// accede al ultimo elemento
 
@@ -304,8 +305,6 @@ public class Labyrinth2 {
 		return true;
 
 	}
-	
-	
 
 	/* ----------------- IMPLEMENTACIÓN DEL CODIGO David ----------------- */
 
@@ -365,8 +364,10 @@ public class Labyrinth2 {
 		}
 
 	}
+
 	public boolean secondPath(boolean rigth) {
-		ArrayList<Coordinate2> prueba = new ArrayList<Coordinate2>();
+		ArrayList<Coordinate2> pruebaAux = new ArrayList<Coordinate2>(); //array auxiliar
+		boolean search = false;
 		path = new ArrayList<Coordinate2>();
 
 		// guarda en la casilla inicial en el camino
@@ -376,12 +377,11 @@ public class Labyrinth2 {
 		startCell.direction = 0;
 		// ArrayList<Coordinate2> rigthPath= new ArrayList<Coordinate2>();
 		path.add(startCell);
-		
 
-		while (  path.size() > 0) {// algt	//if
+		while (path.size() > 0) {// algt //if
 			// incrementar la direccion
 			path.get(path.size() - 1).direction += 1;// accede al ultimo elemento
-			
+
 			if (path.get(path.size() - 1).direction <= 4) {
 				// comprobaciones casillas
 				Coordinate2 nextCell = setNextCell(path.get(path.size() - 1));
@@ -390,22 +390,53 @@ public class Labyrinth2 {
 					path.add(nextCell);
 				}
 				if (nextCell.i == endI && nextCell.j == endJ) {// comprueba casiila de salida
-					return true;
+					search = true;
+
+					if (pruebaAux.size() == 0) { // Si encuentra el primer camino lo guarda en el auxiliar
+						pruebaAux = copyArray(path);
+						
+					}
+
+					if (pruebaAux.size() > path.size()) {// Comprueba si el aux es mas grande que path el más corto
+						pruebaAux = copyArray(path);
+						pruebaAux.add(nextCell);
+					}
+					
 				}
+			
 
 			} else {
 				path.remove(path.size() - 1);// borra la ultima poscion
 
 			}
-			
-		
-			
-			
-		}
-		
-		secondPath(rigth);
 
-		return true;
+		}
+
+		path = copyArray(pruebaAux);
+
+		return search;
+
+	}
+	
+	//Los arrayList comparten memoria 
+
+	// Si se modifica el path , se modifica el auxiliar porque comparten la misma
+	// memoria al ser arrayList
+
+	public ArrayList<Coordinate2> copyArray(ArrayList<Coordinate2> copy) {
+
+		ArrayList<Coordinate2> copyOf = new ArrayList<Coordinate2>();
+
+		for (int i = 0; i < copy.size(); i++) { //
+			Coordinate2 Coor = new Coordinate2(); // guardo
+			Coor.i = copy.get(i).i;
+			Coor.j = copy.get(i).j;
+			Coor.direction = copy.get(i).direction;
+
+			copyOf.add(Coor); // añado en diferentes espacio de memoria
+		}
+
+		return copyOf;
 
 	}
 
