@@ -125,7 +125,7 @@ public class Labyrinth2 {
 			}
 
 			// Pinta el camino
-			if (search) {
+			if (search ) {
 				if (map[startI][startJ] == 'E') {
 					// map[startI][startJ] = 'E';
 
@@ -158,11 +158,13 @@ public class Labyrinth2 {
 				}
 				System.out.println();
 			}
-
+		
+				//path = new ArrayList<Coordinate2>();
+		
 		} catch (Exception e) {
 			System.out.println("\nVuelva a intentarlo,porfavor");
 		}
-
+		
 	}
 
 	public void setEntraceExit() {
@@ -175,9 +177,10 @@ public class Labyrinth2 {
 		if (startI != 0) {
 			map[startI][startJ] = ' ';
 			map[endI][endJ] = ' ';
+			path = new ArrayList<Coordinate2>();// para limpiarlo
 
 		}
-		// showMap(); // muestra el mapa
+		
 		System.out.println("\nIntroduce la coordenadas de [E]ntrada / [S]alida");
 		startI = Interface2.getInt("Fila [E]: ");
 		startJ = Interface2.getInt("Columna [E]: ");
@@ -185,14 +188,7 @@ public class Labyrinth2 {
 		endJ = Interface2.getInt("Columna [S]: ");
 
 		try {
-			// si son iguales
-
-			/*
-			 * if (startI == startJ && endI == endJ) {
-			 * System.err.println("\nLo siento los valores no son validos"); return;
-			 * 
-			 * }
-			 */
+			
 			// entrada
 			if (map[startI][startJ] != ' ') {
 				System.err.println("\n¡Opps! Te has encontrado con una pared");
@@ -202,7 +198,7 @@ public class Labyrinth2 {
 				System.err.println("\n¡Opps! Te has encontrado con una pared");
 				return;
 			}
-
+			
 			map[startI][startJ] = 'E';
 			map[endI][endJ] = 'S';
 			path = new ArrayList<Coordinate2>();// para limpiarlo
@@ -235,7 +231,7 @@ public class Labyrinth2 {
 					search = true;
 					showMap();
 					step();
-					path = new ArrayList<Coordinate2>();
+					
 				} else {
 					System.out.println("No encontrado");
 				}
@@ -249,6 +245,7 @@ public class Labyrinth2 {
 					showMap();
 					step();
 					System.out.println("<<<Fin>>>");
+					
 				} else {
 					System.out.println("No encontrado");
 				}
@@ -303,6 +300,7 @@ public class Labyrinth2 {
 		}
 
 		return true;
+		
 
 	}
 

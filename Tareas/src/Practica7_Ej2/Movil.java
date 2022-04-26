@@ -1,5 +1,4 @@
 package Practica7_Ej2;
-
 public class Movil {
 
 	public static void main(String[] args) {

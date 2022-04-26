@@ -1,20 +1,20 @@
 package Practica7_Ej2;
 
-public class Libro_Libreria07 {
-
+public class Libro_Biblioteca06 {
 	private String nombre;
 	private final String ISBN;
 	private String Autor;
 	private String Genero;
-	private int precio;;
+	private String Alquilado;
 	private boolean disponible;
 
-	public Libro_Libreria07(String nombre, String iSBN, String autor, String genero, int precio, boolean disponible) {
+	public Libro_Biblioteca06(String nombre, String iSBN, String autor, String genero, String alquilado,
+			boolean disponible) {
 		this.nombre = nombre;
 		this.ISBN = iSBN;
 		this.Autor = autor;
 		this.Genero = genero;
-		this.precio = precio;
+		this.Alquilado = alquilado;
 		this.disponible = disponible;
 	}
 
@@ -42,12 +42,12 @@ public class Libro_Libreria07 {
 		Genero = genero;
 	}
 
-	public int getPrecio() {
-		return precio;
+	public String getAlquilado() {
+		return Alquilado;
 	}
 
-	public void setPrecio(int precio) {
-		this.precio = precio;
+	public void setAlquilado(String alquilado) {
+		Alquilado = alquilado;
 	}
 
 	public boolean isDisponible() {
@@ -61,5 +61,7 @@ public class Libro_Libreria07 {
 	public String getISBN() {
 		return ISBN;
 	}
+	
+	
 
 }
