@@ -10,7 +10,6 @@ public class ModificationUser {
 		case 1:
 			DATABASE.updateData(user, "password", chooseData("password"));
 			break;
-
 		case 2:
 			DATABASE.updateData(user, "name", chooseData("name"));
 			break;
@@ -107,7 +106,7 @@ public class ModificationUser {
 				return data;
 			}
 		}
-		return null;
+		return "null";
 
 	}
 

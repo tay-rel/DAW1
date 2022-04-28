@@ -154,12 +154,32 @@ public class DATABASE {
 	}
 
 	public static boolean updateData(User us, String option, String data) {
-
+		if (data.equals("null")) {
+			return false;
+		}
 		try {
+
 			Class.forName(driver);
 			Connection conn = DriverManager.getConnection(url, user, pass);// clase coneccion
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("UPDATE users SET " + option + "='" + data + "' WHERE username='" + us.username + "';");
+			stmt.close();
+			conn.close();
+			return true;
+		} catch (Exception e) {
+			System.err.println("ERROR: " + e); // Se usa un try/catch porque en la base de datos puede fallar algo
+		}
+		return false;
+	}
+
+	public static boolean deleteData(String us) {
+
+		try {
+
+			Class.forName(driver);
+			Connection conn = DriverManager.getConnection(url, user, pass);// clase coneccion
+			Statement stmt = conn.createStatement();
+			stmt.executeUpdate("DELETE FROM users WHERE username='" + us + "';");
 			stmt.close();
 			conn.close();
 			return true;

@@ -165,16 +165,31 @@ public class Session { // controla los aspectos de control de usuario
 		int option = Interface.getInt(Config.modificationMenu);
 		switch (option) {
 		case 1:
-		ModificationUser.option(user);
-		user=DATABASE.loginCurrent(user.username);
+			ModificationUser.option(user);
+			user = DATABASE.loginCurrent(user.username);
 
 			break;
 		case 2:
-			System.out.println("Eliminar usuario");
+			deleteUser();
 
 		default:
 			break;
 		}
+	}
+
+	public void deleteUser() {
+		String password = Interface.getString("Introduce password para confirmar los cambios: ");
+		if (DATABASE.login(user.username, Utils.getMD5(password)) == null) {
+			System.out.println("La contraseña no coincide");
+			return;
+		} else {
+			if (DATABASE.deleteData(user.username)) {
+				System.out.println("El usuario ha sido eliminado");
+				logout();
+			}
+
+		}
+
 	}
 
 	// cerrar session
