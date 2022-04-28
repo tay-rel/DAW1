@@ -26,8 +26,5 @@ public class Config {// Guarda propiedades estaticas
 			+ "\nSeleccionar una opcion: ";
 	public static final String modificationMenu = "------------------------------\n 1. Modificar datos\n 2. Eliminar usuario\n 0. Salir\n"
 			+ "------------------------------" + "\nSeleccionar una opcion: ";
-	public static final String modMenuData = "\n\t<<<Menu>>>\n" + "\n1. Modificar contraseña\n" + "2. Modificar nombre completo\n"
-			+ "3. Modificar NIF\n" + "4. Modificar correo electronico\n" + "5. Modificar direccion\n"
-			+ "6. Modificar fecha de nacimiento\n0. Salir\n" + "\nSeleccione una opcion: ";
 
 }

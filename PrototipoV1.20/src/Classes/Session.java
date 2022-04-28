@@ -64,14 +64,14 @@ public class Session { // controla los aspectos de control de usuario
 			System.err.println("Las contraseñas deben contener" + " por lo menos un número y un carácter especial, "
 					+ "incluir letras en mayúscula y minúscula, " + "tener una longitud mínima de 8 caracteres y "
 					+ "no contener su correo electrónico o coincidir con él.");
-			Log.addLines("El registro no se ha realizado correctamente", data[1]);
+			Log.addLines("El registro no se ha realizado correctamente", data[0]);
 
 			return;
 		}
 		data[2] = Interface.getString("Nombre Completo: ");
 		if (Utils.validateName(data[2]) == false) {
 			System.err.println("El formato de la nombre no es correcto");
-			Log.addLines("El registro no se ha realizado correctamente", data[2]);
+			Log.addLines("El registro no se ha realizado correctamente", data[0]);
 
 			return;
 		}
@@ -79,13 +79,13 @@ public class Session { // controla los aspectos de control de usuario
 
 		if (Utils.validateDni(data[3]) == false) {
 			System.err.println("El formato del DNI no es correcto");
-			Log.addLines("El registro no se ha realizado correctamente", data[3]);
+			Log.addLines("El registro no se ha realizado correctamente", data[0]);
 
 			return;
 		}
 		if (DATABASE.chekNif(data[3]) == true) {
 			System.err.println("El NIF ya existe");
-			Log.addLines("El registro no se ha realizado correctamente", data[3]);
+			Log.addLines("El registro no se ha realizado correctamente", data[0]);
 
 			return;
 		}
@@ -93,13 +93,13 @@ public class Session { // controla los aspectos de control de usuario
 
 		if (Utils.validateEmail(data[4]) == false) {
 			System.err.println("El formato del email no es correcto");
-			Log.addLines("El registro no se ha realizado correctamente", data[4]);
+			Log.addLines("El registro no se ha realizado correctamente", data[0]);
 
 			return;
 		}
 		if (DATABASE.chekEmail(data[4]) == true) {
 			System.err.println("El email ya existe");
-			Log.addLines("El registro no se ha realizado correctamente", data[4]);
+			Log.addLines("El registro no se ha realizado correctamente", data[0]);
 
 			return;
 		}
@@ -108,7 +108,7 @@ public class Session { // controla los aspectos de control de usuario
 		data[6] = Interface.getString("Fecha de nacimiento: ");
 		if (Utils.validateDate(data[6]) == false) {
 			System.err.println("El formato de la Fecha no es correcto");
-			Log.addLines("El registro no se ha realizado correctamente", data[6]);
+			Log.addLines("El registro no se ha realizado correctamente", data[0]);
 
 			return;
 		}
@@ -165,7 +165,11 @@ public class Session { // controla los aspectos de control de usuario
 		int option = Interface.getInt(Config.modificationMenu);
 		switch (option) {
 		case 1:
-		ModificationUser.option(user);
+			// String currentData[] = new String[6];
+			System.out.println("modificar");
+			ModificationUser s= new ModificationUser();
+			s.modificationData();
+			singUp();
 
 			break;
 		case 2:

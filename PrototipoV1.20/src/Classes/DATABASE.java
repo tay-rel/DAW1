@@ -115,7 +115,9 @@ public class DATABASE {
 		try {
 
 			Class.forName(driver);
-			Connection conn = DriverManager.getConnection(url, user, pass);// clase coneccion
+			Connection conn = DriverManager.getConnection(url, user, pass);// clase
+																			// //
+																			// coneccion
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE nif='" + NIF + "';");
 
@@ -136,32 +138,11 @@ public class DATABASE {
 		try {
 
 			Class.forName(driver);
-			Connection conn = DriverManager.getConnection(url, user, pass);// clase coneccion
+			Connection conn = DriverManager.getConnection(url, user, pass);// clase
+																			// //
+																			// coneccion
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE email='" + email + "';");
-
-			while (rs.next()) { // si encuentra algo entra a while
-				return true;
-			}
-
-			stmt.close();
-			conn.close();
-
-		} catch (Exception e) {
-			System.err.println("ERROR: " + e); // Se usa un try/catch porque en la base de datos puede fallar algo
-		}
-		return false;
-	}
-	
-	public static boolean updateData(User us,String option) {
-		String data=ModificationUser.chooseData(option);
-		
-		
-		try {
-			Class.forName(driver);
-			Connection conn = DriverManager.getConnection(url, user, pass);// clase coneccion
-			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("UPDATE users SET " + option +"= '"+ data  +"' WHERE id = " + us.id);
 
 			while (rs.next()) { // si encuentra algo entra a while
 				return true;

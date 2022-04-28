@@ -9,7 +9,7 @@ import java.util.Calendar;
 public class Log {
 
 	public Log() {
-		//registerEvent();
+		registerEvent();
 	}
 
 	public void registerEvent() {
