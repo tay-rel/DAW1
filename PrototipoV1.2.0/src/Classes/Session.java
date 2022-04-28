@@ -61,9 +61,9 @@ public class Session { // controla los aspectos de control de usuario
 
 		data[1] = Interface.getString("Password: ");
 		if (Utils.validatePassword(data[1]) == false) {
-			System.err.println("Las contraseñas deben contener" + " por lo menos un número y un carácter especial, "
-					+ "incluir letras en mayúscula y minúscula, " + "tener una longitud mínima de 8 caracteres y "
-					+ "no contener su correo electrónico o coincidir con él.");
+			System.err.println("Las contraseï¿½as deben contener" + " por lo menos un nï¿½mero y un carï¿½cter especial, "
+					+ "incluir letras en mayï¿½scula y minï¿½scula, " + "tener una longitud mï¿½nima de 8 caracteres y "
+					+ "no contener su correo electrï¿½nico o coincidir con ï¿½l.");
 			Log.addLines("El registro no se ha realizado correctamente", data[1]);
 
 			return;
@@ -166,6 +166,7 @@ public class Session { // controla los aspectos de control de usuario
 		switch (option) {
 		case 1:
 		ModificationUser.option(user);
+		user=DATABASE.loginCurrent(user.username);
 
 			break;
 		case 2:

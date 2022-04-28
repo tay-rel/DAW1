@@ -7,7 +7,7 @@ import java.sql.Statement;
 
 public class DATABASE {
 	private static final String driver = "com.mysql.cj.jdbc.Driver";
-	private static final String url = "jdbc:mysql://127.0.0.1:33060/labyrinth";
+	private static final String url = "jdbc:mysql://127.0.0.1:3306/labyrinth";
 	private static final String user = "root";
 	private static final String pass = "ariel";
 
@@ -152,19 +152,49 @@ public class DATABASE {
 		}
 		return false;
 	}
-	
-	public static boolean updateData(User us,String option) {
-		String data=ModificationUser.chooseData(option);
-		
-		
+
+	public static boolean updateData(User us, String option, String data) {
+
 		try {
 			Class.forName(driver);
 			Connection conn = DriverManager.getConnection(url, user, pass);// clase coneccion
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("UPDATE users SET " + option +"= '"+ data  +"' WHERE id = " + us.id);
+			stmt.executeUpdate("UPDATE users SET " + option + "='" + data + "' WHERE username='" + us.username + "';");
+			stmt.close();
+			conn.close();
+			return true;
+		} catch (Exception e) {
+			System.err.println("ERROR: " + e); // Se usa un try/catch porque en la base de datos puede fallar algo
+		}
+		return false;
+	}
+
+	public static User loginCurrent(String username) {
+
+		// Comprueba: System.out.println("SELECT * FROM users WHERE username='" +
+		// username + "' AND password='" + password + "';");
+
+		try {
+
+			Class.forName(driver);
+			Connection conn = DriverManager.getConnection(url, user, pass);// clase
+																			// //
+																			// coneccion
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE username='" + username + "';");
 
 			while (rs.next()) { // si encuentra algo entra a while
-				return true;
+				User user = new User(); // todos los datos se mete en una variable de tipo objeto User
+				user.id = rs.getInt("id");
+				user.username = rs.getString("username");
+				user.name = rs.getString("name");
+				user.nif = rs.getString("nif");
+				user.email = rs.getString("email");
+				user.address = rs.getString("address");
+				user.birthdate = rs.getString("birthdate");
+				user.role = rs.getString("role");
+
+				return user;
 			}
 
 			stmt.close();
@@ -173,6 +203,7 @@ public class DATABASE {
 		} catch (Exception e) {
 			System.err.println("ERROR: " + e); // Se usa un try/catch porque en la base de datos puede fallar algo
 		}
-		return false;
+		return null;
+
 	}
 }
