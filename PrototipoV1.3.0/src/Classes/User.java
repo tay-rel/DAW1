@@ -10,6 +10,10 @@ public class User{ //es una clase publica
 	public String address;
 	public String birthdate;
 	public String role;
+	public String getUsername() {
+		return username;
+	}
+	
 	
 	
 }

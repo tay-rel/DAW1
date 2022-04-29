@@ -5,8 +5,8 @@ public class Config {// Guarda propiedades estaticas
 	// todas las clases seran public,static,final
 	public static final String version = "v1.1.0";
 	public static final int miliseconds = 2000;
-	public static final String labyrinthsPath = "C:\\Users\\tay-r\\Documents\\Java\\DAW1\\Prototipo0.2.0\\assets\\labyrinths\\";
-	public static final String logEvent = "C:\\Users\\tay-r\\Documents\\Java\\DAW1\\PrototipoV1.2.0\\assets\\files\\";
+	public static final String labyrinthsPath = "C:\\Users\\tay-r\\Documents\\Java\\DAW1\\Prototipo0.3.0\\assets\\labyrinths\\";
+	public static final String logEvent = "C:\\Users\\tay-r\\Documents\\Java\\DAW1\\PrototipoV1.3.0\\assets\\files\\";
 	public static final String saveEvent = "syslog.txt";
 	public static final String usersFile = "users.txt";
 
@@ -29,5 +29,8 @@ public class Config {// Guarda propiedades estaticas
 	public static final String modMenuData = "\n\t<<<Menu>>>\n" + "\n1. Modificar contraseña\n" + "2. Modificar nombre completo\n"
 			+ "3. Modificar NIF\n" + "4. Modificar correo electronico\n" + "5. Modificar direccion\n"
 			+ "6. Modificar fecha de nacimiento\n0. Salir\n" + "\nSeleccione una opcion: ";
-
+	public static final String roleMenu="------------------------------\n 1. Crear usuario\n 2. Ver usuarios\n "
+			+ "3. Modificar usuario\n "
+			+ "4. Eliminar usuario\n 0. Salir\n"
+			+ "------------------------------" + "\nSeleccionar una opcion: ";
 }

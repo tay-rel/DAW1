@@ -98,6 +98,7 @@ public class Main {
 			session.showUser();
 			break;
 		case 6:
+			session.role();
 			session.modification();
 			break;
 		case 7:
