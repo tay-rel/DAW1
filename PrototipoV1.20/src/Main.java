@@ -89,7 +89,7 @@ public class Main {
 			break;
 		case 4:
 			labyrinth.selectAlgoritm();
-			Log.addLines("Acceder a la selección buscar caminos ");
+			Log.addLines("Acceder a la selecciÃ³n buscar caminos ");
 			Thread.sleep(Config.miliseconds);
 
 			break;
@@ -98,6 +98,7 @@ public class Main {
 			session.showUser();
 			break;
 		case 6:
+			session.role();
 			session.modification();
 			break;
 		case 7:

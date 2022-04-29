@@ -20,11 +20,17 @@ public class Config {// Guarda propiedades estaticas
 
 	public static final String LoggedMenu = "\n\t<<<Menu>>>\n" + "\n1. Cargar laberinto\n" + "2. Ver laberinto actual\n"
 			+ "3. Establecer casillas de entrada y salida\n" + "4. Buscar caminos\n" + "5. Ver usuario actual\n"
-			+ "6. Modificación de datos\n" + "7. Cerrar sesion\n0. Salir\n" + "\nSeleccione una opcion: ";
+			+ "6. Modificaciï¿½n de datos\n" + "7. Cerrar sesion\n0. Salir\n" + "\nSeleccione una opcion: ";
 	public static final String algorithMenu = "\n\t<<<Selelcciona un camino>>>\n\t------------------------"
 			+ "\n1- Primer camino posible \n" + "2- El camino mas corto\n" + "0- Salir\n"
 			+ "\nSeleccionar una opcion: ";
 	public static final String modificationMenu = "------------------------------\n 1. Modificar datos\n 2. Eliminar usuario\n 0. Salir\n"
 			+ "------------------------------" + "\nSeleccionar una opcion: ";
-
+	public static final String modMenuData = "\n\t<<<Menu>>>\n" + "\n1. Modificar contraseÃ±a\n" + "2. Modificar nombre completo\n"
+			+ "3. Modificar NIF\n" + "4. Modificar correo electronico\n" + "5. Modificar direccion\n"
+			+ "6. Modificar fecha de nacimiento\n0. Salir\n" + "\nSeleccione una opcion: ";
+	public static final String roleMenu="------------------------------\n 1. Crear usuario\n 2. Ver usuarios\n "
+			+ "3. Modificar usuario\n "
+			+ "4. Eliminar usuario\n 0. Salir\n"
+			+ "------------------------------" + "\nSeleccionar una opcion: ";
 }

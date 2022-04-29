@@ -1,60 +1,110 @@
 package Classes;
 
-public class ModificationUser extends Session {
+public class ModificationUser {
 
-	public static void modificationData() {
-		Session ses = new Session();
+	public static void option(User user) {
 
-		if (ses.islogged() == true) {
-			String currentData[] = new String[6];
-			currentData[0] = Interface.getString("Password: ");
-			if (Utils.validatePassword(currentData[0]) == false) {
-				System.err.println("Las contraseñas deben contener" + " por lo menos un número y un carácter especial, "
-						+ "incluir letras en mayúscula y minúscula, " + "tener una longitud mínima de 8 caracteres y "
-						+ "no contener su correo electrónico o coincidir con él.");
-				return;
-			}
+		int option = Interface.getInt(Config.modMenuData);
+		switch (option) {
+		case 1:
+			DATABASE.updateData(user, "password", chooseData("password"));
+			break;
+		case 2:
+			DATABASE.updateData(user, "name", chooseData("name"));
+			break;
+		case 3:
+			DATABASE.updateData(user, "nif", chooseData("nif"));
+			break;
+		case 4:
+			DATABASE.updateData(user, "email", chooseData("email"));
+			break;
+		case 5:
+			DATABASE.updateData(user, "address", chooseData("address"));
+			break;
+		case 6:
+			DATABASE.updateData(user, "birthdate", chooseData("birthdate"));
+			break;
 
-			currentData[1] = Interface.getString("Nombre Completo: ");
-			if (Utils.validateName(currentData[1]) == false) {
-				System.err.println("El formato de la nombre no es correcto");
-				return;
-			}
-
-			currentData[2] = Interface.getString("NIF: ");
-
-			if (Utils.validateDni(currentData[2]) == false) {
-				System.err.println("El formato del DNI no es correcto");
-				return;
-			}
-
-			if (DATABASE.chekNif(currentData[2]) == true) {
-				System.err.println("El NIF ya existe");
-				return;
-			}
-
-			currentData[3] = Interface.getString("Email: ");
-
-			if (Utils.validateEmail(currentData[3]) == false) {
-				System.err.println("El formato del email no es correcto");
-				return;
-			}
-			if (DATABASE.chekEmail(currentData[3]) == true) {
-				System.err.println("El email ya existe");
-				return;
-			}
-
-			currentData[4] = Interface.getString("Direccion: ");
-
-			currentData[5] = Interface.getString("Fecha de nacimiento: ");
-			if (Utils.validateDate(currentData[5]) == false) {
-				System.err.println("El formato de la Fecha no es correcto");
-				return;
-			}
+		default:
+			break;
 		}
+
 	}
 
-	public void deleteUser(String pass) {
+	public static String chooseData(String data) {
+		if (data.equals("password")) {
+
+			String pass = Interface.getString("Password: ");
+			if (Utils.validatePassword(pass) == false) {
+				System.err.println("Las contraseï¿½as deben contener" + " por lo menos un nï¿½mero y un carï¿½cter especial, "
+						+ "incluir letras en mayï¿½scula y minï¿½scula, " + "tener una longitud mï¿½nima de 8 caracteres y "
+						+ "no contener su correo electrï¿½nico o coincidir con ï¿½l.");
+				Log.addLines("La modificacion no se ha realizado correctamente", pass);
+
+			} else {
+				return pass = Utils.getMD5(pass);
+
+			}
+		}
+		if (data.equals("name")) {
+			data = Interface.getString("Nombre Completo: ");
+			if (Utils.validateName(data) == false) {
+				System.err.println("El formato del nombre no es correcto");
+				Log.addLines("La modificacion no se ha realizado correctamente", data);
+			} else {
+				return data;
+			}
+		}
+		if (data.equals("nif")) {
+			data = Interface.getString("NIF: ");
+
+			if (Utils.validateDni(data) == false) {
+				System.err.println("El formato del DNI no es correcto");
+				Log.addLines("La modificacion no se ha realizado correctamente", data);
+
+			} else {
+				return data;
+			}
+			if (DATABASE.chekData("nif", data) == true) {
+				System.err.println("El NIF ya existe");
+				Log.addLines("El registro no se ha realizado correctamente", data);
+
+			} else {
+				return data;
+			}
+		}
+
+		if (data.equals("email")) {
+			data = Interface.getString("Email: ");
+			if (Utils.validateEmail(data) == false) {
+				System.err.println("El formato del email no es correcto");
+				Log.addLines("La modificacion no se ha realizado correctamente", data);
+
+			} else {
+				return data;
+			}
+			if (DATABASE.chekData("email", data) == true) {
+				System.err.println("El email ya existe");
+				Log.addLines("La modificacion no se ha realizado correctamente", data);
+
+			} else {
+				return data;
+			}
+		}
+		if (data.equals("address")) {
+			data = Interface.getString("Direccion: ");
+		}
+		if (data.equals("birthdate")) {
+			data = Interface.getString("Fecha de nacimiento: ");
+			if (Utils.validateDate(data) == false) {
+				System.err.println("El formato de la Fecha no es correcto");
+				Log.addLines("El registro no se ha realizado correctamente", data);
+
+			} else {
+				return data;
+			}
+		}
+		return "null";
 
 	}
 

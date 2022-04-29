@@ -1,15 +1,8 @@
 package Classes;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Scanner;
-
+import java.io.*;
+import java.util.*;
 import javax.xml.crypto.Data;
-
 import Classes.User;
 
 public class Session { // controla los aspectos de control de usuario
@@ -52,7 +45,7 @@ public class Session { // controla los aspectos de control de usuario
 
 			return;
 		}
-		if (DATABASE.chekUser(data[0]) == true) {
+		if (DATABASE.chekData("username", data[0]) == true) {
 			System.err.println("El usuario ya existe");
 			Log.addLines("El registro no se ha realizado correctamente", data[0]);
 
@@ -61,17 +54,17 @@ public class Session { // controla los aspectos de control de usuario
 
 		data[1] = Interface.getString("Password: ");
 		if (Utils.validatePassword(data[1]) == false) {
-			System.err.println("Las contraseñas deben contener" + " por lo menos un número y un carácter especial, "
-					+ "incluir letras en mayúscula y minúscula, " + "tener una longitud mínima de 8 caracteres y "
-					+ "no contener su correo electrónico o coincidir con él.");
-			Log.addLines("El registro no se ha realizado correctamente", data[0]);
+			System.err.println("Las contraseÃ±as deben contener" + " por lo menos un nÃºmero y un carÃ¡cter especial, "
+					+ "incluir letras en mayÃºscula y minÃºscula, " + "tener una longitud mÃ­nima de 8 caracteres y "
+					+ "no contener su correo electrÃ³nico o coincidir con Ã©l.");
+			Log.addLines("El registro no se ha realizado correctamente", data[1]);
 
 			return;
 		}
 		data[2] = Interface.getString("Nombre Completo: ");
 		if (Utils.validateName(data[2]) == false) {
 			System.err.println("El formato de la nombre no es correcto");
-			Log.addLines("El registro no se ha realizado correctamente", data[0]);
+			Log.addLines("El registro no se ha realizado correctamente", data[2]);
 
 			return;
 		}
@@ -79,13 +72,13 @@ public class Session { // controla los aspectos de control de usuario
 
 		if (Utils.validateDni(data[3]) == false) {
 			System.err.println("El formato del DNI no es correcto");
-			Log.addLines("El registro no se ha realizado correctamente", data[0]);
+			Log.addLines("El registro no se ha realizado correctamente", data[3]);
 
 			return;
 		}
-		if (DATABASE.chekNif(data[3]) == true) {
+		if (DATABASE.chekData("nif", data[3]) == true) {
 			System.err.println("El NIF ya existe");
-			Log.addLines("El registro no se ha realizado correctamente", data[0]);
+			Log.addLines("El registro no se ha realizado correctamente", data[3]);
 
 			return;
 		}
@@ -93,13 +86,13 @@ public class Session { // controla los aspectos de control de usuario
 
 		if (Utils.validateEmail(data[4]) == false) {
 			System.err.println("El formato del email no es correcto");
-			Log.addLines("El registro no se ha realizado correctamente", data[0]);
+			Log.addLines("El registro no se ha realizado correctamente", data[4]);
 
 			return;
 		}
-		if (DATABASE.chekEmail(data[4]) == true) {
+		if (DATABASE.chekData("email", data[4]) == true) {
 			System.err.println("El email ya existe");
-			Log.addLines("El registro no se ha realizado correctamente", data[0]);
+			Log.addLines("El registro no se ha realizado correctamente", data[4]);
 
 			return;
 		}
@@ -108,7 +101,7 @@ public class Session { // controla los aspectos de control de usuario
 		data[6] = Interface.getString("Fecha de nacimiento: ");
 		if (Utils.validateDate(data[6]) == false) {
 			System.err.println("El formato de la Fecha no es correcto");
-			Log.addLines("El registro no se ha realizado correctamente", data[0]);
+			Log.addLines("El registro no se ha realizado correctamente", data[6]);
 
 			return;
 		}
@@ -165,20 +158,64 @@ public class Session { // controla los aspectos de control de usuario
 		int option = Interface.getInt(Config.modificationMenu);
 		switch (option) {
 		case 1:
-			// String currentData[] = new String[6];
-			System.out.println("modificar");
-			ModificationUser s= new ModificationUser();
-			s.modificationData();
-			singUp();
+			ModificationUser.option(user);
+			user = DATABASE.loginCurrent(user.username);
 
 			break;
 		case 2:
-			System.out.println("Eliminar usuario");
+			deleteUser();
 
 		default:
 			break;
 		}
 	}
+
+	public void deleteUser() {
+		String password = Interface.getString("Introduce password para confirmar los cambios: ");
+		if (DATABASE.login(user.username, Utils.getMD5(password)) == null) {
+			System.out.println("La contraseï¿½a no coincide");
+			return;
+		} else {
+			if (DATABASE.deleteData(user.username)) {
+				System.out.println("El usuario ha sido eliminado");
+				logout();
+			}
+
+		}
+
+	}
+	
+	public void role() {
+		if (user.role.equals("admin")) {
+			int option=Interface.getInt(Config.roleMenu);
+			switch (option) {
+			case 1:
+				singUp();
+				break;
+			case 2:
+				Recorre();
+				break;
+			case 3:
+				ModificationUser.option(user);
+				break;
+			case 4:
+				deleteUser();
+			default:
+				break;
+			}
+			return;
+			
+		}
+	}
+	
+	public void Recorre() {
+		ArrayList<String> sd= DATABASE.listAll();
+		for (String string : sd) {
+			System.out.println(string);
+		}
+		
+	}
+	
 
 	// cerrar session
 	public void logout() {

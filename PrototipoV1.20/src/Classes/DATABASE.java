@@ -4,10 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class DATABASE {
 	private static final String driver = "com.mysql.cj.jdbc.Driver";
-	private static final String url = "jdbc:mysql://127.0.0.1:33060/labyrinth";
+	private static final String url = "jdbc:mysql://127.0.0.1:3306/labyrinth";
 	private static final String user = "root";
 	private static final String pass = "ariel";
 
@@ -88,18 +89,91 @@ public class DATABASE {
 
 	}
 
-	public static boolean chekUser(String username) {
+	public static boolean chekData(String data, String value) {
 		try {
 
 			Class.forName(driver);
 			Connection conn = DriverManager.getConnection(url, user, pass);// clase
 																			// //
 																			// coneccion
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE " + data + "='" + value + "';");
+
+			while (rs.next()) { // si encuentra algo entra a while
+				return true;
+			}
+
+			stmt.close();
+			conn.close();
+
+		} catch (Exception e) {
+			System.err.println("ERROR: " + e); // Se usa un try/catch porque en la base de datos puede fallar algo
+		}
+		return false;
+	}
+
+	public static boolean updateData(User us, String option, String data) {
+		if (data.equals("null")) {
+			return false;
+		}
+
+		try {
+			Class.forName(driver);
+			Connection conn = DriverManager.getConnection(url, user, pass);// clase coneccion
+			Statement stmt = conn.createStatement();
+			stmt.executeUpdate("UPDATE users SET " + option + "='" + data + "' WHERE id='" + us.id + "';");
+
+			stmt.close();
+			conn.close();
+			return true;
+
+		} catch (Exception e) {
+			System.err.println("ERROR: " + e); // Se usa un try/catch porque en la base de datos puede fallar algo
+		}
+		return false;
+	}
+
+	public static boolean deleteData(String value) {
+		try {
+			Class.forName(driver);
+			Connection conn = DriverManager.getConnection(url, user, pass);// clase coneccion
+			Statement stmt = conn.createStatement();
+			stmt.executeUpdate("DELETE FROM users WHERE username='" + value + "';");
+
+			stmt.close();
+			conn.close();
+			return true;
+
+		} catch (Exception e) {
+			System.err.println("ERROR: " + e); // Se usa un try/catch porque en la base de datos puede fallar algo
+		}
+		return false;
+	}
+
+	public static User loginCurrent(String username) {
+
+		// Comprueba: System.out.println("SELECT * FROM users WHERE username='" +
+		// username + "' AND password='" + password + "';");
+
+		try {
+
+			Class.forName(driver);
+			Connection conn = DriverManager.getConnection(url, user, pass);// clase coneccion
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE username='" + username + "';");
 
 			while (rs.next()) { // si encuentra algo entra a while
-				return true;
+				User user = new User(); // todos los datos se mete en una variable de tipo objeto User
+				user.id = rs.getInt("id");
+				user.username = rs.getString("username");
+				user.name = rs.getString("name");
+				user.nif = rs.getString("nif");
+				user.email = rs.getString("email");
+				user.address = rs.getString("address");
+				user.birthdate = rs.getString("birthdate");
+				user.role = rs.getString("role");
+
+				return user;
 			}
 
 			stmt.close();
@@ -108,52 +182,35 @@ public class DATABASE {
 		} catch (Exception e) {
 			System.err.println("ERROR: " + e); // Se usa un try/catch porque en la base de datos puede fallar algo
 		}
-		return false;
+		return null;
+
 	}
 
-	public static boolean chekNif(String NIF) {
+	public static ArrayList<String> listAll() {
+
+		System.out.println("SELECT username FROM users;");
+		ArrayList<String> users = new ArrayList<String>();
 		try {
 
 			Class.forName(driver);
-			Connection conn = DriverManager.getConnection(url, user, pass);// clase
-																			// //
-																			// coneccion
+			Connection conn = DriverManager.getConnection(url, user, pass);// clase coneccion
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE nif='" + NIF + "';");
+			ResultSet rs = stmt.executeQuery("SELECT username FROM users;");
 
 			while (rs.next()) { // si encuentra algo entra a while
-				return true;
-			}
 
+				users.add(rs.getString("username"));
+
+			}
+			
 			stmt.close();
 			conn.close();
-
+			return users;
 		} catch (Exception e) {
 			System.err.println("ERROR: " + e); // Se usa un try/catch porque en la base de datos puede fallar algo
+			return users;
 		}
-		return false;
-	}
+	
 
-	public static boolean chekEmail(String email) {
-		try {
-
-			Class.forName(driver);
-			Connection conn = DriverManager.getConnection(url, user, pass);// clase
-																			// //
-																			// coneccion
-			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE email='" + email + "';");
-
-			while (rs.next()) { // si encuentra algo entra a while
-				return true;
-			}
-
-			stmt.close();
-			conn.close();
-
-		} catch (Exception e) {
-			System.err.println("ERROR: " + e); // Se usa un try/catch porque en la base de datos puede fallar algo
-		}
-		return false;
 	}
 }
