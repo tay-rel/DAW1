@@ -15,7 +15,7 @@ public class Formulario extends JFrame implements ActionListener {
 
 	private Container contenedor;
 	private JLabel titulo, labelYear, informacion;
-	private TextField campoYear;
+	private JTextField campoYear;
 	private JButton botonComprobar;
 
 	// Constructor
@@ -34,7 +34,7 @@ public class Formulario extends JFrame implements ActionListener {
 		this.contenedor.add(this.titulo);
 
 		// Label campo del año
-		this.labelYear = new JTextField();
+		this.labelYear = new JLabel();
 		this.labelYear.setFont(new Font("Times new Roman", Font.PLAIN, 30));
 		this.labelYear.setSize(100, 20);// Para el titulo , es el tamaño
 		this.labelYear.setLocation(100, 100);
@@ -48,14 +48,16 @@ public class Formulario extends JFrame implements ActionListener {
 		this.contenedor.add(this.campoYear);
 
 		// Boton comprobar
-		this.botonComprobar = new JTextField();
+		this.botonComprobar = new JButton("Comprobar");
 		this.botonComprobar.setFont(new Font("Times new Roman", Font.PLAIN, 30));
 		this.botonComprobar.setSize(100, 20);// Para el titulo , es el tamaño
 		this.botonComprobar.setLocation(100, 155);
+		this.botonComprobar.addActionListener(this);// Aqui se añade el listener
+
 		this.contenedor.add(this.botonComprobar);
 
 		// informacion
-		this.informacion = new JTextField();
+		this.informacion = new JLabel("");
 		this.informacion.setFont(new Font("Times new Roman", Font.PLAIN, 30));
 		this.informacion.setSize(500, 25);// Para el titulo , es el tamaño
 		this.informacion.setLocation(100, 190);

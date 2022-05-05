@@ -183,3 +183,6 @@
 2022/04/29 15:38:44- Mostrar el usuario actual- '4 - Alberto'
 2022/04/29 15:40:09- Inicio de programa- '........'
 2022/04/29 15:40:22- El inicio se ha realizado correctamente- 'Alberto'
+2022/04/29 17:49:28- Inicio de programa- '........'
+2022/04/29 17:49:46- El inicio se ha realizado correctamente- 'Alberto'
+2022/05/05 15:48:07- Inicio de programa- '........'

@@ -184,16 +184,16 @@ public class Session { // controla los aspectos de control de usuario
 		}
 
 	}
-	
+
 	public void role() {
 		if (user.role.equals("admin")) {
-			int option=Interface.getInt(Config.roleMenu);
+			int option = Interface.getInt(Config.roleMenu);
 			switch (option) {
 			case 1:
 				singUp();
 				break;
 			case 2:
-				Recorre();
+				showUsers();
 				break;
 			case 3:
 				ModificationUser.option(user);
@@ -204,18 +204,19 @@ public class Session { // controla los aspectos de control de usuario
 				break;
 			}
 			return;
-			
+
+		} else if (user.role.equals("user")) {
+			modification();
 		}
 	}
-	
-	public void Recorre() {
-		ArrayList<String> sd= DATABASE.listAll();
+
+	public void showUsers() {
+		ArrayList<String> sd = DATABASE.listAll();
 		for (String string : sd) {
 			System.out.println(string);
 		}
-		
+
 	}
-	
 
 	// cerrar session
 	public void logout() {
