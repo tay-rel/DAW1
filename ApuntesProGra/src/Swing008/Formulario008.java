@@ -30,7 +30,7 @@ public class Formulario008 extends JFrame implements ActionListener {
 	public Formulario008() {
 		super.setTitle("Agenda -Nuevo Contacto");
 		super.setBounds(100, 100, 600, 500);
-		super.setResizable(false);// Que no se pueda redimensionar
+		super.setResizable(true);// Que no se pueda redimensionar
 		super.setDefaultCloseOperation(EXIT_ON_CLOSE);// Para que se cierre la ventanita que se desplega arriba
 
 		this.contenedor = super.getContentPane();
@@ -54,8 +54,9 @@ public class Formulario008 extends JFrame implements ActionListener {
 		// Campo nombre
 		this.campoNombre = new JTextField();
 		this.campoNombre.setFont(new Font("Arial", Font.PLAIN, 20));
-		this.campoNombre.setSize(190, 20);
+		this.campoNombre.setSize(210, 20);
 		this.campoNombre.setLocation(100, 105);
+		this.campoNombre.addActionListener(this); // habilitar 'Enter' para buscar
 		this.contenedor.add(this.campoNombre);
 
 		// RadioButtons

@@ -61,8 +61,8 @@ public class DBSwing09 {
 				where += "nombre LIKE '%" + terminos[i] + "%' OR ";
 				where += "apellido1 LIKE '%" + terminos[i] + "%' OR ";
 				where += "apellido2 LIKE '%" + terminos[i] + "%' OR ";
-				where += "nie LIKE '%" + terminos[i] + "%' OR ";
-				where += "email LIKE '%" + terminos[i] + "%' OR ";
+				where += "dni LIKE '%" + terminos[i] + "%' OR ";
+				where += "email LIKE '%" + terminos[i] + "%' ";
 				if (i != terminos.length - 1) {
 					where += " OR ";
 				}
