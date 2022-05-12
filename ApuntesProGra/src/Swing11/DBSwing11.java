@@ -63,13 +63,13 @@ public class DBSwing11 {
 		String[] terminos = texto.split(" ");
 		for (int i = 0; i < terminos.length; i++) { // De esta forma recorremos cada una de las palabras buscando un resultado
 			if (terminos[i].length() > 0) {
-				where += "profesor.nombre LIKE '%" + terminos[i] + "%' OR ";
+				where += "(profesor.nombre LIKE '%" + terminos[i] + "%' OR ";
 				where += "profesor.apellido1 LIKE '%" + terminos[i] + "%' OR ";
 				where += "profesor.apellido2 LIKE '%" + terminos[i] + "%' OR ";
-				where += "departamento.nombre LIKE '%" + terminos[i] + "%' ";
+				where += "departamento.nombre LIKE '%" + terminos[i] + "%') ";
 
 				if (i != terminos.length - 1) {//si es distinto el ultimo elemento ,le aumentamos un OR
-					where += " OR ";
+					where += " AND ";
 				}
 			}
 		}
