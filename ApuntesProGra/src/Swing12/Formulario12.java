@@ -141,7 +141,7 @@ public class Formulario12 extends JFrame implements ActionListener {
 			this.informacion.setText("Se ha encontrado " + lista.size() + " resultados!");
 			this.botonSiguiente.setVisible(true);
 			this.setResultados(lista);
-			if (lista.size() < 5) {
+			if (lista.size() < 5 || DBSwing12.consulta(texto, this.offset + 5).size() == 0) {
 				this.botonSiguiente.setVisible(false);
 			}
 		} else {
