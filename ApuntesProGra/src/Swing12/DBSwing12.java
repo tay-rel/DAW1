@@ -70,7 +70,7 @@ public class DBSwing12 {
 				where += "departamento.nombre LIKE '%" + terminos[i] + "%') ";
 
 				if (i != terminos.length - 1) {//si es distinto el ultimo elemento ,le aumentamos un OR
-					where += " OR ";
+					where += " AND ";
 				}
 			}
 		}
