@@ -12,6 +12,8 @@ import java.util.Scanner;
 import Classes.Config;
 import Classes.Interface;
 import Classes.Session;
+import Classes.User;
+import Classes.optionRole;
 import Classes.Labyrinth;
 import Classes.Log;
 
@@ -24,6 +26,8 @@ public class Main {
 	public static Session session = new Session();
 	public static Labyrinth labyrinth = new Labyrinth();
 	public static Log logEvent = new Log();
+	public static optionRole role = new optionRole();
+	public static User usua = new User();
 
 	public static void main(String[] args) throws InterruptedException, IOException {
 
@@ -94,19 +98,19 @@ public class Main {
 
 			break;
 		case 5:
-			// muestra al usuario cuando tiene la session iniciada
-			session.showUser();
+
+			session.showUser();// muestra al usuario cuando tiene la session iniciada
 			break;
 		case 6:
-			session.role();
-			session.modification();
+
+			role.chooseRole(option);
+
 			break;
 		case 7:
 			System.out.println("\nCerrando sesion");
 			labyrinth = new Labyrinth();
 			// session = new Session(); //instanciamos de nuevo
-			session.logout(); // Para limpiarlo
-			// tiempo de espera
+			Session.logout(); // Para limpiarlo
 			Thread.sleep(Config.miliseconds);
 			break;
 

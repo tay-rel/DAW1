@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
 
 import javax.xml.crypto.Data;
@@ -15,8 +16,8 @@ import Classes.User;
 public class Session { // controla los aspectos de control de usuario
 
 	// Propiedades
-	private User user = new User();
-	private boolean logged;
+	private static User user = new User();
+	private static boolean logged;
 
 	// constructor
 	public Session() {
@@ -33,12 +34,14 @@ public class Session { // controla los aspectos de control de usuario
 	}
 
 	// devuelve al usuario actual
-	public User getUser() {
+	public static User getUser() {
 		return user;
 
 	}
 
-	public void singUp() {
+	public static Labyrinth labyrinth = new Labyrinth();
+
+	public static void singUp() {
 		System.out.println("\nREGISTRO\n");
 		// String username = Interface.getString("\nNombre de usuario: "); // paso 1
 		// boolean pr = false;
@@ -114,6 +117,7 @@ public class Session { // controla los aspectos de control de usuario
 		}
 
 		if (DATABASE.singUp(data[0], data[1], data[2], data[3], data[4], data[5], data[6])) {
+			System.out.println("\tEl usuario ha sido creado correctamente");
 			Log.addLines("Registro exitoso ", data[0]);
 		}
 
@@ -142,8 +146,8 @@ public class Session { // controla los aspectos de control de usuario
 
 	}
 
-	public void showUser() {
-		// llamo a la variable de User user
+	public void showUser() { // llamo a la variable de User user
+
 		System.out.println("\n Usuario actual\n----------------");
 		System.out.println("ID: " + user.id);
 		System.out.println("Usuario : " + user.username);
@@ -161,63 +165,8 @@ public class Session { // controla los aspectos de control de usuario
 
 	}
 
-	public void modification() {
-		int option = Interface.getInt(Config.modificationMenu);
-		switch (option) {
-		case 1:
-			ModificationUser.option(user);
-			user = DATABASE.loginCurrent(user.username);
-
-			break;
-		case 2:
-			deleteUser();
-
-		default:
-			break;
-		}
-	}
-
-	public void deleteUser() {
-		String password = Interface.getString("Introduce password para confirmar los cambios: ");
-		if (DATABASE.login(user.username, Utils.getMD5(password)) == null) {
-			System.out.println("La contrase�a no coincide");
-			return;
-		} else {
-			if (DATABASE.deleteData(user.username)) {
-				System.out.println("El usuario ha sido eliminado");
-				logout();
-			}
-
-		}
-
-	}
-	
-	public void role() {
-		if (user.role.equals("admin")) {
-			int option=Interface.getInt(Config.roleMenu);
-			switch (option) {
-			case 1:
-				singUp();
-				break;
-			case 2:
-				DATABASE.listAll();
-				break;
-			case 3:
-				ModificationUser.option(user);
-				break;
-			case 4:
-				deleteUser();
-			default:
-				break;
-			}
-			return;
-			
-		}
-	}
-	
-
 	// cerrar session
-	public void logout() {
+	public static void logout() {
 		logged = false;
 		user = new User(); // limpiamos la classe User
 		Log.addLines("Cerrando sesion ", user.username);

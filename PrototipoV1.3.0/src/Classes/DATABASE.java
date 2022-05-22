@@ -17,19 +17,12 @@ public class DATABASE {
 	public static boolean singUp(String username, String password, String name, String nif, String email,
 			String address, String birthdate) {
 
-		/*
-		 * COMPRUEBA:System.out.println(
-		 * "INSERT INTO users(username,password, name, nif, email, address, birthdate) VALUES ('<<Username>>','<<Password>>','<<Nombre>>', '<<NIF>>', '<<Email>>', '<<Direccion>>', '<<Fecha de Nacimiento>>');"
-		 * );
-		 */
-
 		try {
 
 			Class.forName(driver);
 			Connection conn = DriverManager.getConnection(url, user, pass);// clase objeto de tipo coneccion
-			// User user = new User();
+
 			Statement stmt = conn.createStatement();
-			// String encrypt = Utils.getMD5(password);
 
 			String query = plantilla.replaceAll("<<Username>>", username)
 					.replaceAll("<<Password>>", Utils.getMD5(password)).replaceAll("<<Nombre>>", name)
@@ -52,15 +45,10 @@ public class DATABASE {
 
 	public static User login(String username, String password) {
 
-		// Comprueba: System.out.println("SELECT * FROM users WHERE username='" +
-		// username + "' AND password='" + password + "';");
-
 		try {
 
 			Class.forName(driver);
-			Connection conn = DriverManager.getConnection(url, user, pass);// clase
-																			// //
-																			// coneccion
+			Connection conn = DriverManager.getConnection(url, user, pass);
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(
 					"SELECT * FROM users WHERE username='" + username + "' AND password='" + password + "';");
@@ -133,12 +121,31 @@ public class DATABASE {
 		return false;
 	}
 
-	public static boolean deleteData(String value) {
+	public static boolean deleteData(String u) {
 		try {
 			Class.forName(driver);
 			Connection conn = DriverManager.getConnection(url, user, pass);// clase coneccion
 			Statement stmt = conn.createStatement();
-			stmt.executeUpdate("DELETE FROM users WHERE username='" + value + "';");
+
+			stmt.executeUpdate("DELETE FROM users WHERE username ='" + u + "';");
+
+			stmt.close();
+			conn.close();
+
+			return true;
+
+		} catch (Exception e) {
+			System.err.println("ERROR: " + e); // Se usa un try/catch porque en la base de datos puede fallar algo
+		}
+		return false;
+	}
+
+	public static boolean deleteDataAdmin(User choose) {
+		try {
+			Class.forName(driver);
+			Connection conn = DriverManager.getConnection(url, user, pass);// clase coneccion
+			Statement stmt = conn.createStatement();
+			stmt.executeUpdate("DELETE FROM users WHERE id='" + choose.id + "';");
 
 			stmt.close();
 			conn.close();
@@ -152,15 +159,12 @@ public class DATABASE {
 
 	public static User loginCurrent(String username) {
 
-		// Comprueba: System.out.println("SELECT * FROM users WHERE username='" +
-		// username + "' AND password='" + password + "';");
-
 		try {
 
 			Class.forName(driver);
 			Connection conn = DriverManager.getConnection(url, user, pass);// clase coneccion
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE username='" + username + "';");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE id='" + username + "';");
 
 			while (rs.next()) { // si encuentra algo entra a while
 				User user = new User(); // todos los datos se mete en una variable de tipo objeto User
@@ -186,41 +190,39 @@ public class DATABASE {
 
 	}
 
-	public static boolean listAll() {
+	public static ArrayList<User> listAll() {
 
-		System.out.println("SELECT username FROM users;");
+		ArrayList<User> users = new ArrayList<User>();
 		try {
 
 			Class.forName(driver);
 			Connection conn = DriverManager.getConnection(url, user, pass);// clase coneccion
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT username FROM users;");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM users;");
 
 			while (rs.next()) { // si encuentra algo entra a while
-				/*
-				 * User user = new User(); // todos los datos se mete en una variable de tipo
-				 * objeto User user.username = rs.getString("username");
-				 * System.out.println(user.username);
-				 */
 
-				ArrayList<String> users = new ArrayList<String>();
+				User user = new User();
+				user.id = rs.getInt("id");
+				user.username = rs.getString("username");
+				user.name = rs.getString("name");
+				user.nif = rs.getString("nif");
+				user.email = rs.getString("email");
+				user.address = rs.getString("address");
+				user.birthdate = rs.getString("birthdate");
+				user.role = rs.getString("role");
+				users.add(user);
 
-				users.add(rs.getString("username"));
-
-				for (String u : users) {
-					System.out.println(users);
-				}
-
-				return true;
 			}
 
 			stmt.close();
 			conn.close();
+			return users;
 
 		} catch (Exception e) {
 			System.err.println("ERROR: " + e); // Se usa un try/catch porque en la base de datos puede fallar algo
 		}
-		return false;
+		return users;
 
 	}
 }
